@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.main,
     fontSize: 50,
     fontWeight: "bold",
-    lineHeight: 50,
   },
 });
 

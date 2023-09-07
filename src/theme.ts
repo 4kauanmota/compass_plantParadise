@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const colors = {
   primary: "#418B64",
@@ -9,16 +9,20 @@ export const colors = {
   },
 };
 
-export const button = StyleSheet.create({
+export const shadow = StyleSheet.create({
   main: {
-    flex: 1,
-
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-
-    backgroundColor: "#0f0",
-    borderRadius: 8,
+    margin: 8,
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.font.strong,
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 6,
+      },
+    }),
   },
 });
 

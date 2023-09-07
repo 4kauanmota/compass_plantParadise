@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Auth from "../pages/Auth";
 import Details from "../pages/Details";
 import BottomTabs from "./BottomTabs";
+import { colors } from "../theme";
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -14,7 +15,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ contentStyle: { backgroundColor: colors.background } }}
+    >
       <Stack.Screen
         name="Auth"
         component={Auth}

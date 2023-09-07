@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../pages/Home";
 import Cart from "../pages/Cart";
 import Favorites from "../pages/Favorites";
+import { colors } from "../theme";
 
 export type RootTabParamList = {
   Home: undefined;

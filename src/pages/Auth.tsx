@@ -29,7 +29,7 @@ const Auth = ({ navigation }: AuthType) => {
         </View>
 
         <View style={styles.actions}>
-          <TextButton onPress={() => navigation.navigate("Details", { id: 0 })}>
+          <TextButton onPress={() => navigation.navigate("Tabs")}>
             Sign In
           </TextButton>
 
@@ -78,12 +78,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    flex: 3,
+    flex: 4.5,
   },
 
   description: {
-    flex: 1,
-    transform: [{ translateY: -14 }],
+    flex: 2,
 
     fontFamily: fonts.main,
     fontSize: 14,
