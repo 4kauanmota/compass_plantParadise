@@ -2,7 +2,8 @@ import { View, StyleSheet, Image, Text, Platform } from "react-native";
 
 import Plant from "../../models/Plant";
 import TextButton from "./TextButton";
-import { colors, shadow } from "../../theme";
+import { colors, fonts, shadow } from "../../theme";
+import FavoriteButton from "./FavoriteButton";
 
 type TinyCardType = {
   plant: Plant;
@@ -10,16 +11,20 @@ type TinyCardType = {
 
 const TinyCard = ({ plant }: TinyCardType) => {
   return (
-    <View style={[styles.container, shadow.main]}>
+    <View style={[styles.container, shadow.main, { margin: 8 }]}>
       <View style={[styles.container]}>
         <View style={styles.preview}>
           <Image style={styles.image} source={{ uri: plant.Image }} />
+          <FavoriteButton
+            style={styles.favoriteButton}
+            onPress={() => console.log("oi")}
+          />
         </View>
 
         <View style={styles.details}>
           <View style={styles.description}>
-            <Text>{plant.Name}</Text>
-            <Text>${plant.Price}</Text>
+            <Text style={styles.name}>{plant.Name}</Text>
+            <Text style={styles.price}>${plant.Price}</Text>
           </View>
 
           <View style={styles.action}>
@@ -50,12 +55,19 @@ const styles = StyleSheet.create({
 
   preview: {
     flex: 1,
+    position: "relative",
   },
 
   image: {
     width: "100%",
     height: "100%",
     borderRadius: 8,
+  },
+
+  favoriteButton: {
+    position: "absolute",
+    top: 4,
+    left: 4,
   },
 
   ////////
@@ -67,6 +79,16 @@ const styles = StyleSheet.create({
 
   description: {
     flex: 4,
+  },
+
+  name: {
+    fontFamily: fonts.main,
+    fontWeight: "500",
+  },
+
+  price: {
+    fontFamily: fonts.main,
+    fontWeight: "bold",
   },
 
   action: {

@@ -11,7 +11,6 @@ export const colors = {
 
 export const shadow = StyleSheet.create({
   main: {
-    margin: 8,
     ...Platform.select({
       ios: {
         shadowColor: colors.font.strong,
