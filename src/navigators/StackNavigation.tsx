@@ -15,7 +15,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const StackNavigation = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Auth" component={Auth} />
+      <Stack.Screen
+        name="Auth"
+        component={Auth}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="Tabs"
         component={BottomTabs}

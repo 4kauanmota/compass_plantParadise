@@ -1,6 +1,26 @@
+import { StyleSheet } from "react-native";
+
 export const colors = {
-  white: "#ffffff",
+  primary: "#418B64",
+  background: "#ffffff",
+  font: {
+    strong: "#000000",
+    light: "",
+  },
 };
+
+export const button = StyleSheet.create({
+  main: {
+    flex: 1,
+
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 16,
+
+    backgroundColor: "#0f0",
+    borderRadius: 8,
+  },
+});
 
 export const fonts = {
   main: "Poppins",
@@ -9,7 +29,7 @@ export const fonts = {
 
 export const pressEffect = {
   android: {
-    color: colors.white,
+    color: colors.background,
     borderless: false,
   },
 

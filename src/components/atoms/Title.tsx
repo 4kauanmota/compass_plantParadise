@@ -1,14 +1,15 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { fonts } from "../../theme";
 
 type TitleType = {
   children: any;
+  style?: StyleProp<ViewStyle>;
 };
 
-const Title = ({ children }: TitleType) => {
+const Title = ({ children, style }: TitleType) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}> {children} </Text>
+    <View style={[styles.container, style]}>
+      <Text style={styles.title}>{children}</Text>
     </View>
   );
 };
@@ -16,9 +17,13 @@ const Title = ({ children }: TitleType) => {
 const styles = StyleSheet.create({
   container: {},
   title: {
+    height: "100%",
+    textAlign: "left",
+    textAlignVertical: "center",
+
     fontFamily: fonts.main,
     fontSize: 50,
-    fontWeight: "600",
+    fontWeight: "bold",
     lineHeight: 50,
   },
 });
