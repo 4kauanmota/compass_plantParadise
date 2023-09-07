@@ -2,7 +2,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 
 import Plant from "../../models/Plant";
 import LargeCard from "../molecules/LargeCard";
-import SubTitle from "../atoms/SubTitle";
+import TextOptions from "../atoms/TextOptions";
 
 type LargeCardListType = {
   children: string;
@@ -10,11 +10,15 @@ type LargeCardListType = {
 };
 
 const LargeCardList = ({ children, plants }: LargeCardListType) => {
+  const filterOptions: ITextOptions[] = [
+    { text: "All", selected: true },
+    { text: "Indoor", selected: false },
+    { text: "OutDoor", selected: false },
+  ];
+
   return (
     <View style={styles.container}>
-      <SubTitle style={styles.subTitle} textStyle={styles.subTitleText}>
-        {children}
-      </SubTitle>
+      <TextOptions options={filterOptions} />
 
       <FlatList
         data={plants}
@@ -31,17 +35,6 @@ const LargeCardList = ({ children, plants }: LargeCardListType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  subTitle: {
-    flex: 1,
-    paddingVertical: 20,
-  },
-
-  subTitleText: {
-    fontSize: 16,
-    height: "100%",
-    textAlignVertical: "center",
   },
 
   ////////

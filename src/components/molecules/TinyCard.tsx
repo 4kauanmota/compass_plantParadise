@@ -46,8 +46,8 @@ const TinyCard = ({ plant }: TinyCardType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 270,
-    height: 110,
+    width: 287,
+    height: 140,
     flexDirection: "row",
 
     backgroundColor: colors.background,

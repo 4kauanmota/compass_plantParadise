@@ -5,7 +5,7 @@ export const colors = {
   background: "#ffffff",
   font: {
     strong: "#000000",
-    light: "",
+    light: "#969595",
   },
 };
 
