@@ -2,6 +2,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
+  View,
   ViewStyle,
 } from "react-native";
 import Animated, {
@@ -17,23 +18,25 @@ import PressArea from "../atoms/PressArea";
 import { colors, shadow } from "../../theme";
 
 type FavoriteButtonType = {
+  onPress: () => void;
   style?: StyleProp<ViewStyle>;
-  onPress: (event: GestureResponderEvent) => void;
+  iconActive: any;
+  iconDisable: any;
 };
 
-const FavoriteButton = ({ onPress, style }: FavoriteButtonType) => {
-  const favorited = useSharedValue(0);
+const AnimatedIconButton = ({
+  onPress,
+  style,
+  iconActive,
+  iconDisable,
+}: FavoriteButtonType) => {
+  const state = useSharedValue(0);
 
   const outlineStyle = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          scale: interpolate(
-            favorited.value,
-            [0, 1],
-            [1, 0],
-            Extrapolate.CLAMP
-          ),
+          scale: interpolate(state.value, [0, 1], [1, 0], Extrapolate.CLAMP),
         },
       ],
     };
@@ -43,31 +46,36 @@ const FavoriteButton = ({ onPress, style }: FavoriteButtonType) => {
     return {
       transform: [
         {
-          scale: favorited.value,
+          scale: state.value,
         },
       ],
-      opacity: favorited.value,
+      opacity: state.value,
     };
   });
 
   return (
     <PressArea
-      onPress={() => (favorited.value = withSpring(favorited.value ? 0 : 1))}
+      onPress={() => {
+        onPress();
+        return (state.value = withSpring(state.value ? 0 : 1));
+      }}
       style={[styles.button, style, shadow.main]}
     >
       <Animated.View style={[StyleSheet.absoluteFill, outlineStyle]}>
         <MaterialCommunityIcons
-          name={"heart-outline"}
+          name={iconDisable.icon}
           size={18}
-          color={colors.font.strong}
+          color={iconDisable.color}
+          style={styles.icon}
         />
       </Animated.View>
 
       <Animated.View style={fillStyle}>
         <MaterialCommunityIcons
-          name={"heart"}
+          name={iconActive.icon}
           size={18}
-          color={colors.primary}
+          color={iconActive.color}
+          style={styles.icon}
         />
       </Animated.View>
     </PressArea>
@@ -86,13 +94,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  favorite: {
+  ////////
+
+  icon: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: 30,
+    height: 30,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });
 
-export default FavoriteButton;
+export default AnimatedIconButton;

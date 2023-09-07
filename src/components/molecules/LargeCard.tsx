@@ -5,13 +5,13 @@ import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 
-type TinyCardType = {
+type LargeCardType = {
   plant: Plant;
 };
 
-const TinyCard = ({ plant }: TinyCardType) => {
+const LargeCard = ({ plant }: LargeCardType) => {
   return (
-    <View style={[styles.container, shadow.main, { margin: 8 }]}>
+    <View style={[styles.container, shadow.main]}>
       <View style={[styles.container]}>
         <View style={styles.preview}>
           <Image style={styles.image} source={{ uri: plant.Image }} />
@@ -30,12 +30,15 @@ const TinyCard = ({ plant }: TinyCardType) => {
           </View>
 
           <View style={styles.action}>
-            <TextButton
-              textStyle={{ fontSize: 12 }}
-              onPress={() => console.log("hello world")}
-            >
-              Add to cart
-            </TextButton>
+            <AnimatedIconButton
+              onPress={() => console.log("oi")}
+              style={styles.buyButton}
+              iconActive={{ icon: "shopping", color: colors.background }}
+              iconDisable={{
+                icon: "shopping-outline",
+                color: colors.background,
+              }}
+            />
           </View>
         </View>
       </View>
@@ -46,9 +49,8 @@ const TinyCard = ({ plant }: TinyCardType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 270,
-    height: 110,
-    flexDirection: "row",
+    width: "100%",
+    height: 279,
 
     backgroundColor: colors.background,
     borderRadius: 8,
@@ -57,46 +59,59 @@ const styles = StyleSheet.create({
   ////////
 
   preview: {
-    flex: 1.2,
+    flex: 9,
     position: "relative",
   },
 
   image: {
     width: "100%",
     height: "100%",
-    borderRadius: 8,
+
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
 
   favoriteButton: {
     position: "absolute",
-    top: 4,
-    left: 4,
+    top: 12,
+    left: 12,
   },
 
   ////////
 
   details: {
-    flex: 1,
-    padding: 8,
+    flex: 3,
+    paddingLeft: 14,
+
+    flexDirection: "row",
   },
 
   description: {
-    flex: 4,
+    flex: 6,
+    justifyContent: "center",
   },
 
   name: {
     fontFamily: fonts.main,
-    fontWeight: "500",
+    fontWeight: "bold",
+    lineHeight: 24,
   },
 
   price: {
     fontFamily: fonts.main,
-    fontWeight: "bold",
+    fontWeight: "400",
+    lineHeight: 24,
   },
 
   action: {
     flex: 1,
+    justifyContent: "center",
+  },
+
+  buyButton: {
+    position: "absolute",
+    backgroundColor: colors.primary,
   },
 });
 
-export default TinyCard;
+export default LargeCard;

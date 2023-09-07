@@ -12,6 +12,7 @@ const VirtualizedList = ({ children, style }: VirtualizedListType) => {
       renderItem={null}
       ListHeaderComponent={<>{children}</>}
       style={style}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

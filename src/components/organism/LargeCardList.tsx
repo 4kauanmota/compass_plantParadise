@@ -1,45 +1,45 @@
 import { View, StyleSheet, FlatList } from "react-native";
 
 import Plant from "../../models/Plant";
-import { colors, shadow } from "../../theme";
-import TinyCard from "../molecules/TinyCard";
+import LargeCard from "../molecules/LargeCard";
 import SubTitle from "../atoms/SubTitle";
 
-type TinyCardListType = {
+type LargeCardListType = {
   children: string;
   plants: Plant[];
 };
 
-const TinyCardList = ({ children, plants }: TinyCardListType) => {
+const LargeCardList = ({ children, plants }: LargeCardListType) => {
   return (
-    <>
+    <View style={styles.container}>
       <SubTitle style={styles.subTitle} textStyle={styles.subTitleText}>
         {children}
       </SubTitle>
 
       <FlatList
         data={plants}
-        renderItem={({ item }) => <TinyCard plant={item} />}
+        renderItem={({ item }) => <LargeCard plant={item} />}
         keyExtractor={(item) => item.Id}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        ListFooterComponent={<View style={{ paddingRight: 32 }}></View>}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={<></>}
         style={styles.list}
       />
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
   subTitle: {
-    flex: 0.35,
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: 16,
+    flex: 1,
+    paddingVertical: 20,
   },
 
   subTitleText: {
-    fontSize: 20,
+    fontSize: 16,
     height: "100%",
     textAlignVertical: "center",
   },
@@ -48,8 +48,9 @@ const styles = StyleSheet.create({
 
   list: {
     flex: 1,
-    paddingLeft: 16,
+    marginRight: 24,
+    gap: 20,
   },
 });
 
-export default TinyCardList;
+export default LargeCardList;
