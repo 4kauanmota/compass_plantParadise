@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     textAlignVertical: "center",
 
-    fontFamily: fonts.main,
+    fontFamily: fonts.main[600],
     fontSize: 24,
-    fontWeight: "bold",
   },
 });
 

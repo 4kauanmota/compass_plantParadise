@@ -16,14 +16,17 @@ const Title = ({ children, style }: TitleType) => {
 
 const styles = StyleSheet.create({
   container: {},
+
+  ////////
+
   title: {
     height: "100%",
     textAlign: "left",
-    textAlignVertical: "center",
+    textAlignVertical: "bottom",
 
-    fontFamily: fonts.main,
+    fontFamily: fonts.main[600],
     fontSize: 50,
-    fontWeight: "bold",
+    lineHeight: 50,
   },
 });
 

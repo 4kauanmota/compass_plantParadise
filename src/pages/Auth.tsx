@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 
   text: {
     flex: 4,
-    paddingRight: "35%",
+    paddingRight: "25%",
   },
 
   title: {
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
   description: {
     flex: 2,
 
-    fontFamily: fonts.main,
-    fontSize: 14,
-    fontWeight: "400",
+    fontFamily: fonts.main[400],
+    fontSize: 16,
     textAlignVertical: "top",
+    lineHeight: 20,
   },
 
   actions: {

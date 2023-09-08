@@ -22,9 +22,8 @@ const TextOptions = ({ options }: TextOptionsType) => {
   return (
     <View style={styles.container}>
       {filterOptions.map((option: any, index: number) => (
-        <PressArea onPress={() => handleClick(index)}>
+        <PressArea onPress={() => handleClick(index)} key={index}>
           <Text
-            key={index}
             style={
               option.selected ? [styles.option, styles.selected] : styles.option
             }
@@ -43,12 +42,14 @@ const styles = StyleSheet.create({
     gap: 40,
 
     paddingVertical: 20,
-    paddingLeft: 4,
+    paddingLeft: 2,
   },
+
+  ////////
 
   option: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.main[500],
     color: colors.font.light,
   },
 

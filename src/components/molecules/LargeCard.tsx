@@ -92,14 +92,12 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontFamily: fonts.main,
-    fontWeight: "bold",
+    fontFamily: fonts.main[600],
     lineHeight: 24,
   },
 
   price: {
-    fontFamily: fonts.main,
-    fontWeight: "400",
+    fontFamily: fonts.main[400],
     lineHeight: 24,
   },
 

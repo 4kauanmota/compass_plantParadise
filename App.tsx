@@ -6,8 +6,11 @@ import { useFonts } from "expo-font";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
-    Poppins: require("./assets/font/Poppins-Regular.ttf"),
-    SourceSansPro: require("./assets/font/SourceSansPro-Regular.ttf"),
+    Poppins400: require("./assets/font/Poppins-Regular.ttf"),
+    Poppins500: require("./assets/font/Poppins-Medium.ttf"),
+    Poppins600: require("./assets/font/Poppins-SemiBold.ttf"),
+    SourceSansPro400: require("./assets/font/SourceSansPro-Regular.ttf"),
+    SourceSansPro600: require("./assets/font/SourceSansPro-SemiBold.ttf"),
   });
 
   if (!fontsLoaded) return null;

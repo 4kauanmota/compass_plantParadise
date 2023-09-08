@@ -36,9 +36,8 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
 
     color: colors.background,
-    fontFamily: fonts.secondary,
+    fontFamily: fonts.secondary[400],
     fontSize: 24,
-    fontWeight: "400",
   },
 });
 

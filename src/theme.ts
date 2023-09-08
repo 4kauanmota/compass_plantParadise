@@ -3,9 +3,22 @@ import { StyleSheet, Platform } from "react-native";
 export const colors = {
   primary: "#418B64",
   background: "#ffffff",
+
   font: {
     strong: "#000000",
     light: "#969595",
+  },
+};
+
+export const fonts = {
+  main: {
+    400: "Poppins400",
+    500: "Poppins500",
+    600: "Poppins600",
+  },
+  secondary: {
+    400: "SourceSansPro400",
+    600: "SourceSansPro600",
   },
 };
 
@@ -24,11 +37,6 @@ export const shadow = StyleSheet.create({
     }),
   },
 });
-
-export const fonts = {
-  main: "Poppins",
-  secondary: "SourceSansPro",
-};
 
 export const pressEffect = {
   android: {
