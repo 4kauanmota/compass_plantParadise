@@ -7,9 +7,10 @@ import AnimatedIconButton from "./AnimatedIconButton";
 
 type ListCardType = {
   plant: Plant;
+  action?: any;
 };
 
-const ListCard = ({ plant }: ListCardType) => {
+const ListCard = ({ plant, action }: ListCardType) => {
   return (
     <View style={[styles.container, shadow.main, { marginVertical: 8 }]}>
       <View style={[styles.container]}>
@@ -23,15 +24,7 @@ const ListCard = ({ plant }: ListCardType) => {
             <Text style={styles.price}>${plant.Price}</Text>
           </View>
 
-          <View style={styles.action}>
-            <AnimatedIconButton
-              onPress={() => console.log("oi")}
-              style={styles.favoriteButton}
-              iconSize={20}
-              iconActive={{ icon: "heart", color: colors.primary }}
-              iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
-            />
-          </View>
+          <View style={styles.action}>{action}</View>
         </View>
       </View>
     </View>
@@ -87,12 +80,6 @@ const styles = StyleSheet.create({
   action: {
     flex: 1.2,
     justifyContent: "center",
-  },
-
-  favoriteButton: {
-    width: 40,
-    height: 40,
-    position: "absolute",
   },
 });
 

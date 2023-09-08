@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -37,20 +38,22 @@ const Home = ({ navigation }: HomeType) => {
     "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
   );
 
-  navigation.setOptions({
-    header: () => (
-      <NavBar
-        left={<SubTitle>Hi, John</SubTitle>}
-        right={
-          <MaterialCommunityIcons
-            name="account-circle-outline"
-            size={30}
-            color="black"
-          />
-        }
-      />
-    ),
-  });
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <NavBar
+          left={<SubTitle>Hi, John</SubTitle>}
+          right={
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              size={30}
+              color="black"
+            />
+          }
+        />
+      ),
+    });
+  }, []);
 
   return (
     <VirtualizedList style={styles.container}>
