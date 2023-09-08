@@ -20,6 +20,7 @@ import { colors, shadow } from "../../theme";
 type FavoriteButtonType = {
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
+  iconSize?: number;
   iconActive: any;
   iconDisable: any;
 };
@@ -27,6 +28,7 @@ type FavoriteButtonType = {
 const AnimatedIconButton = ({
   onPress,
   style,
+  iconSize,
   iconActive,
   iconDisable,
 }: FavoriteButtonType) => {
@@ -64,7 +66,7 @@ const AnimatedIconButton = ({
       <Animated.View style={[StyleSheet.absoluteFill, outlineStyle]}>
         <MaterialCommunityIcons
           name={iconDisable.icon}
-          size={18}
+          size={iconSize ?? 16}
           color={iconDisable.color}
           style={styles.icon}
         />
@@ -73,7 +75,7 @@ const AnimatedIconButton = ({
       <Animated.View style={fillStyle}>
         <MaterialCommunityIcons
           name={iconActive.icon}
-          size={18}
+          size={iconSize ?? 16}
           color={iconActive.color}
           style={styles.icon}
         />
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     backgroundColor: colors.background,
-    borderRadius: 15,
+    borderRadius: 100,
 
     width: 30,
     height: 30,

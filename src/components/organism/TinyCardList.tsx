@@ -1,7 +1,6 @@
 import { View, StyleSheet, FlatList } from "react-native";
 
 import Plant from "../../models/Plant";
-import { colors, shadow } from "../../theme";
 import TinyCard from "../molecules/TinyCard";
 import SubTitle from "../atoms/SubTitle";
 

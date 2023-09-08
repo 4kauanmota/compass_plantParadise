@@ -2,7 +2,7 @@ import { FlatList, StyleProp, ViewStyle } from "react-native";
 
 type VirtualizedListType = {
   children: any;
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 };
 
 const VirtualizedList = ({ children, style }: VirtualizedListType) => {
