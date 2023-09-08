@@ -22,11 +22,7 @@ const PressArea = ({ children, onPress, style }: PressAreaType) => {
     <View style={[styles.container, style]}>
       <Pressable
         onPress={onPress}
-        style={
-          Platform.OS === "ios"
-            ? ({ pressed }) => [pressed && pressEffect.ios, styles.pressArea]
-            : [styles.pressArea]
-        }
+        style={({ pressed }) => [pressed && pressEffect.ios, styles.pressArea]}
         android_ripple={pressEffect.android}
       >
         {children}

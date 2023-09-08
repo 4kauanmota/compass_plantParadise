@@ -1,10 +1,4 @@
-import {
-  GestureResponderEvent,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from "react-native";
+import { StyleProp, StyleSheet, ViewStyle } from "react-native";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -13,6 +7,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import PressArea from "../atoms/PressArea";
 import { colors, shadow } from "../../theme";
@@ -20,6 +15,7 @@ import { colors, shadow } from "../../theme";
 type FavoriteButtonType = {
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
+  iconLib?: string;
   iconSize?: number;
   iconActive: any;
   iconDisable: any;
@@ -28,6 +24,7 @@ type FavoriteButtonType = {
 const AnimatedIconButton = ({
   onPress,
   style,
+  iconLib,
   iconSize,
   iconActive,
   iconDisable,
@@ -64,21 +61,39 @@ const AnimatedIconButton = ({
       style={[styles.button, style, shadow.main]}
     >
       <Animated.View style={[StyleSheet.absoluteFill, outlineStyle]}>
-        <MaterialCommunityIcons
-          name={iconDisable.icon}
-          size={iconSize ?? 16}
-          color={iconDisable.color}
-          style={styles.icon}
-        />
+        {iconLib == "ionicons" ? (
+          <Ionicons
+            name={iconDisable.icon}
+            size={iconSize ?? 16}
+            color={iconDisable.color}
+            style={styles.icon}
+          />
+        ) : (
+          <MaterialCommunityIcons
+            name={iconDisable.icon}
+            size={iconSize ?? 16}
+            color={iconDisable.color}
+            style={styles.icon}
+          />
+        )}
       </Animated.View>
 
       <Animated.View style={fillStyle}>
-        <MaterialCommunityIcons
-          name={iconActive.icon}
-          size={iconSize ?? 16}
-          color={iconActive.color}
-          style={styles.icon}
-        />
+        {iconLib == "ionicons" ? (
+          <Ionicons
+            name={iconActive.icon}
+            size={iconSize ?? 16}
+            color={iconActive.color}
+            style={styles.icon}
+          />
+        ) : (
+          <MaterialCommunityIcons
+            name={iconActive.icon}
+            size={iconSize ?? 16}
+            color={iconActive.color}
+            style={styles.icon}
+          />
+        )}
       </Animated.View>
     </PressArea>
   );

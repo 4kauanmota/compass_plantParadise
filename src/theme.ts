@@ -4,6 +4,8 @@ export const colors = {
   primary: "#418B64",
   secondary: "#ECF8F3",
 
+  error: "#FC7272",
+
   background: "#ffffff",
 
   font: {
@@ -21,6 +23,7 @@ export const fonts = {
   secondary: {
     400: "SourceSansPro400",
     600: "SourceSansPro600",
+    700: "SourceSansPro700",
   },
 };
 

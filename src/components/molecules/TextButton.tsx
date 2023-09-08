@@ -4,6 +4,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  ViewStyle,
 } from "react-native";
 
 import PressArea from "../atoms/PressArea";
@@ -11,13 +12,19 @@ import { colors, fonts } from "../../theme";
 
 type TextButtonType = {
   children: string;
+  style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   onPress: (event: GestureResponderEvent) => void;
 };
 
-const TextButton = ({ children, textStyle, onPress }: TextButtonType) => {
+const TextButton = ({
+  children,
+  style,
+  textStyle,
+  onPress,
+}: TextButtonType) => {
   return (
-    <PressArea onPress={onPress} style={styles.button}>
+    <PressArea onPress={onPress} style={[styles.button, style]}>
       <Text style={[styles.text, textStyle]}>{children}</Text>
     </PressArea>
   );

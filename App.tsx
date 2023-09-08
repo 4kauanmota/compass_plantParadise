@@ -11,6 +11,7 @@ const App = () => {
     Poppins600: require("./assets/font/Poppins-SemiBold.ttf"),
     SourceSansPro400: require("./assets/font/SourceSansPro-Regular.ttf"),
     SourceSansPro600: require("./assets/font/SourceSansPro-SemiBold.ttf"),
+    SourceSansPro700: require("./assets/font/SourceSansPro-Bold.ttf"),
   });
 
   if (!fontsLoaded) return null;

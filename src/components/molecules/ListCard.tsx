@@ -1,9 +1,7 @@
 import { View, StyleSheet, Image, Text, Platform } from "react-native";
 
 import Plant from "../../models/Plant";
-import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
-import AnimatedIconButton from "./AnimatedIconButton";
 
 type ListCardType = {
   plant: Plant;
@@ -63,6 +61,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
+  ////////
+
   description: {
     flex: 4,
   },
@@ -78,8 +78,11 @@ const styles = StyleSheet.create({
   },
 
   action: {
-    flex: 1.2,
+    flex: 5,
     justifyContent: "center",
+    alignItems: "flex-end",
+
+    marginRight: 5,
   },
 });
 
