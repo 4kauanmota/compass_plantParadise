@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { RootStackParamList } from "../navigators/StackNavigation";
 import { colors } from "../theme";
@@ -7,6 +8,8 @@ import Plant from "../models/Plant";
 import TinyCardList from "../components/organism/TinyCardList";
 import LargeCardList from "../components/organism/LargeCardList";
 import VirtualizedList from "../components/atoms/VirtualizedList";
+import NavBar from "../components/molecules/NavBar";
+import SubTitle from "../components/atoms/SubTitle";
 
 type HomeType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
@@ -33,6 +36,21 @@ const Home = ({ navigation }: HomeType) => {
     2000,
     "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
   );
+
+  navigation.setOptions({
+    header: () => (
+      <NavBar
+        left={<SubTitle>Hi, John</SubTitle>}
+        right={
+          <MaterialCommunityIcons
+            name="account-circle-outline"
+            size={30}
+            color="black"
+          />
+        }
+      />
+    ),
+  });
 
   return (
     <VirtualizedList style={styles.container}>

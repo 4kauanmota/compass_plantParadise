@@ -78,12 +78,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    flex: 4.5,
+    flex: 4,
   },
 
   description: {
     flex: 2,
-
     fontFamily: fonts.main[400],
     fontSize: 16,
     textAlignVertical: "top",
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
   actions: {
     flex: 2,
     gap: 10,
+    justifyContent: "flex-start",
   },
 
   ////////

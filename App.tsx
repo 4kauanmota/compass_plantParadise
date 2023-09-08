@@ -17,6 +17,8 @@ const App = () => {
 
   return (
     <>
+      <StatusBar style="dark" />
+
       <NavigationContainer>
         <StackNavigation />
       </NavigationContainer>
