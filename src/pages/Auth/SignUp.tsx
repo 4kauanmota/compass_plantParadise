@@ -14,7 +14,7 @@ const SignUp = ({ navigation }: SignUpType) => {
       <Form
         information="Create account"
         type="Sign up"
-        onSubmit={() => navigation.navigate("Tabs")}
+        onSubmit={() => navigation.navigate("Details", { id: 0 })}
         navigation={navigation}
       />
     </View>

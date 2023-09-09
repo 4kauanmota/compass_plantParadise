@@ -50,6 +50,7 @@ const StackNavigation = () => {
                     icon: "chevron-left",
                     color: colors.font.strong,
                   }}
+                  style={{ transform: [{ translateY: -4 }] }}
                   shadowOn={false}
                 />
               }

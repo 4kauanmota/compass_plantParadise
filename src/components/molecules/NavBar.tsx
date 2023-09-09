@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
 
-  left: {},
+  left: {
+    height: 26,
+  },
 
   center: {},
 
