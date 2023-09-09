@@ -1,11 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import Form from "../../components/organism/Form";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <View style={styles.container}>
-      <Form information="Welcome back" type="Sign in" />
+      <Form information="Create account" type="Sign up" />
     </View>
   );
 };
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default SignUp;

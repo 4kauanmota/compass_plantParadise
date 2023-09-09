@@ -29,11 +29,11 @@ const Auth = ({ navigation }: AuthType) => {
         </View>
 
         <View style={styles.actions}>
-          <TextButton onPress={() => navigation.navigate("Tabs")}>
+          <TextButton onPress={() => navigation.navigate("SignIn")}>
             Sign In
           </TextButton>
 
-          <TextButton onPress={() => navigation.navigate("Details", { id: 0 })}>
+          <TextButton onPress={() => navigation.navigate("SignUp")}>
             Sign Up
           </TextButton>
         </View>

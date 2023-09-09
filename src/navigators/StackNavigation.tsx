@@ -7,9 +7,13 @@ import { colors, fonts } from "../theme";
 import NavBar from "../components/molecules/NavBar";
 import SubTitle from "../components/atoms/SubTitle";
 import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
+import SignIn from "../pages/Auth/SignIn";
+import SignUp from "../pages/Auth/SignUp";
 
 export type RootStackParamList = {
   Auth: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
   Tabs: undefined;
   Details: { id: number };
 };
@@ -26,6 +30,57 @@ const StackNavigation = () => {
         component={Auth}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          header: ({ navigation }) => (
+            <NavBar
+              left={
+                <AnimatedIconButton
+                  onPress={() => navigation.goBack()}
+                  iconSize={26}
+                  iconActive={{
+                    icon: "chevron-left",
+                    color: colors.font.strong,
+                  }}
+                  iconDisable={{
+                    icon: "chevron-left",
+                    color: colors.font.strong,
+                  }}
+                  shadowOn={false}
+                />
+              }
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          header: ({ navigation }) => (
+            <NavBar
+              left={
+                <AnimatedIconButton
+                  onPress={() => navigation.goBack()}
+                  iconSize={26}
+                  iconActive={{
+                    icon: "chevron-left",
+                    color: colors.font.strong,
+                  }}
+                  iconDisable={{
+                    icon: "chevron-left",
+                    color: colors.font.strong,
+                  }}
+                  style={{ transform: [{ translateY: -4 }] }}
+                  shadowOn={false}
+                />
+              }
+            />
+          ),
         }}
       />
       <Stack.Screen
