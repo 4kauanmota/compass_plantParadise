@@ -20,6 +20,7 @@ const NavBar = ({ left, center, right }: NavBarType) => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: StatusBar.currentHeight! + 20,
+    paddingBottom: 10,
     paddingHorizontal: 24,
 
     flexDirection: "row",

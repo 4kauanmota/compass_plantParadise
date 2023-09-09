@@ -19,6 +19,7 @@ export const fonts = {
     400: "Poppins400",
     500: "Poppins500",
     600: "Poppins600",
+    700: "Poppins700",
   },
   secondary: {
     400: "SourceSansPro400",

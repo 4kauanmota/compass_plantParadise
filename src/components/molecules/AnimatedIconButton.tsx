@@ -19,6 +19,7 @@ type FavoriteButtonType = {
   iconSize?: number;
   iconActive: any;
   iconDisable: any;
+  shadowOn?: boolean;
 };
 
 const AnimatedIconButton = ({
@@ -28,6 +29,7 @@ const AnimatedIconButton = ({
   iconSize,
   iconActive,
   iconDisable,
+  shadowOn = true,
 }: FavoriteButtonType) => {
   const state = useSharedValue(0);
 
@@ -58,7 +60,7 @@ const AnimatedIconButton = ({
         onPress();
         return (state.value = withSpring(state.value ? 0 : 1));
       }}
-      style={[styles.button, style, shadow.main]}
+      style={[styles.button, style, shadowOn ? shadow.main : null]}
     >
       <Animated.View style={[StyleSheet.absoluteFill, outlineStyle]}>
         {iconLib == "ionicons" ? (

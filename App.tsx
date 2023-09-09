@@ -9,6 +9,7 @@ const App = () => {
     Poppins400: require("./assets/font/Poppins-Regular.ttf"),
     Poppins500: require("./assets/font/Poppins-Medium.ttf"),
     Poppins600: require("./assets/font/Poppins-SemiBold.ttf"),
+    Poppins700: require("./assets/font/Poppins-Black.ttf"),
     SourceSansPro400: require("./assets/font/SourceSansPro-Regular.ttf"),
     SourceSansPro600: require("./assets/font/SourceSansPro-SemiBold.ttf"),
     SourceSansPro700: require("./assets/font/SourceSansPro-Bold.ttf"),

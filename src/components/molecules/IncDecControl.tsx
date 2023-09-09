@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 
 import AnimatedIconButton from "./AnimatedIconButton";
 import { colors, fonts } from "../../theme";
 
-const IncDecControl = () => {
+type IncDecControlType = {
+  style?: StyleProp<ViewStyle>;
+};
+
+const IncDecControl = ({ style }: IncDecControlType) => {
   const [quantity, setQuantity] = useState(1);
 
   const decreaseButton = () => {
@@ -16,7 +20,7 @@ const IncDecControl = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.button}>
         {quantity > 1 ? (
           <AnimatedIconButton
