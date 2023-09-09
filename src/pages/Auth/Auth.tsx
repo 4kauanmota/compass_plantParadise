@@ -1,10 +1,10 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { RootStackParamList } from "../navigators/StackNavigation";
-import Title from "../components/atoms/Title";
-import { fonts } from "../theme";
-import TextButton from "../components/molecules/TextButton";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import Title from "../../components/atoms/Title";
+import { fonts } from "../../theme";
+import TextButton from "../../components/molecules/TextButton";
 
 type AuthType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Auth">;
@@ -16,7 +16,7 @@ const Auth = ({ navigation }: AuthType) => {
       <View style={styles.header}>
         <Image
           style={styles.image}
-          source={require("../../assets/img/HomeBackground.png")}
+          source={require("../../../assets/img/HomeBackground.png")}
         />
       </View>
 

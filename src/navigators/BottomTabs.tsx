@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Home from "../pages/Home";
-import Cart from "../pages/Cart";
-import Favorites from "../pages/Favorites";
+import Cart from "../pages/User/Cart";
+import Favorites from "../pages/User/Favorites";
 import { colors } from "../theme";
 import TabBarItem from "../components/atoms/TabBarItem";
 

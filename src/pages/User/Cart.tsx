@@ -2,15 +2,15 @@ import { useEffect } from "react";
 import { Text, StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { RootStackParamList } from "../navigators/StackNavigation";
-import Plant from "../models/Plant";
-import NavBar from "../components/molecules/NavBar";
-import SubTitle from "../components/atoms/SubTitle";
-import VirtualizedList from "../components/atoms/VirtualizedList";
-import ListCardList from "../components/organism/ListCardList";
-import { colors } from "../theme";
-import IncDecControl from "../components/molecules/IncDecControl";
-import BuyArea from "../components/molecules/BuyArea";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import Plant from "../../models/Plant";
+import NavBar from "../../components/molecules/NavBar";
+import SubTitle from "../../components/atoms/SubTitle";
+import VirtualizedList from "../../components/atoms/VirtualizedList";
+import ListCardList from "../../components/organism/ListCardList";
+import { colors } from "../../theme";
+import IncDecControl from "../../components/molecules/IncDecControl";
+import BuyArea from "../../components/molecules/BuyArea";
 
 type CartType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;

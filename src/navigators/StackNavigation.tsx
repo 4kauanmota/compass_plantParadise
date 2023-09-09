@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Auth from "../pages/Auth";
+import Auth from "../pages/Auth/Auth";
 import Details from "../pages/Details";
 import BottomTabs from "./BottomTabs";
 import { colors, fonts } from "../theme";

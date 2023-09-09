@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { RootStackParamList } from "../navigators/StackNavigation";
-import NavBar from "../components/molecules/NavBar";
-import SubTitle from "../components/atoms/SubTitle";
-import VirtualizedList from "../components/atoms/VirtualizedList";
-import ListCardList from "../components/organism/ListCardList";
-import Plant from "../models/Plant";
-import { colors } from "../theme";
-import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import NavBar from "../../components/molecules/NavBar";
+import SubTitle from "../../components/atoms/SubTitle";
+import VirtualizedList from "../../components/atoms/VirtualizedList";
+import ListCardList from "../../components/organism/ListCardList";
+import Plant from "../../models/Plant";
+import { colors } from "../../theme";
+import AnimatedIconButton from "../../components/molecules/AnimatedIconButton";
 
 type FavoritesType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
