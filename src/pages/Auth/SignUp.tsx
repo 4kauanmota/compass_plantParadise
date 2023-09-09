@@ -1,11 +1,22 @@
 import { View, StyleSheet } from "react-native";
 
 import Form from "../../components/organism/Form";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigators/StackNavigation";
 
-const SignUp = () => {
+type SignUpType = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+const SignUp = ({ navigation }: SignUpType) => {
   return (
     <View style={styles.container}>
-      <Form information="Create account" type="Sign up" />
+      <Form
+        information="Create account"
+        type="Sign up"
+        onSubmit={() => navigation.navigate("Tabs")}
+        navigation={navigation}
+      />
     </View>
   );
 };

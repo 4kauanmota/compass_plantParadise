@@ -5,7 +5,7 @@ import { colors, fonts } from "../../theme";
 type EndLinkTextType = {
   text: string;
   link: string;
-  onPress: () => null;
+  onPress: () => void;
 };
 
 const EndLinkText = ({ text, link, onPress }: EndLinkTextType) => {

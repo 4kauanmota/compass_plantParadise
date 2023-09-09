@@ -1,16 +1,22 @@
 import { View, Image, StyleSheet, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import Input from "../molecules/Input";
 import SubTitle from "../atoms/SubTitle";
 import { colors, fonts } from "../../theme";
 import TextButton from "../molecules/TextButton";
 import EndLinkText from "../atoms/EndLinkText";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type FormType = {
   information: string;
   type: string;
+  onSubmit: () => void;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
-const Form = ({ information, type }: FormType) => {
+const Form = ({ information, type, onSubmit, navigation }: FormType) => {
   return (
     <View style={styles.container}>
       <View style={styles.informations}>
@@ -33,20 +39,20 @@ const Form = ({ information, type }: FormType) => {
       </View>
 
       <View style={styles.actions}>
-        <TextButton style={styles.actionButton} onPress={() => null}>
+        <TextButton style={styles.actionButton} onPress={onSubmit}>
           {type}
         </TextButton>
         {type === "Sign up" ? (
           <EndLinkText
             text="Already have an account?"
             link="Sign in"
-            onPress={() => null}
+            onPress={() => navigation.navigate("SignIn")}
           />
         ) : (
           <EndLinkText
             text="Don't have an account?"
             link="Sign up"
-            onPress={() => null}
+            onPress={() => navigation.navigate("SignUp")}
           />
         )}
       </View>
