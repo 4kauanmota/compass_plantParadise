@@ -5,12 +5,13 @@ import { colors, fonts } from "../../theme";
 type InputType = {
   children?: any;
   placeholder?: string;
+  config?: any;
 };
 
-const Input = ({ children, placeholder }: InputType) => {
+const Input = ({ children, placeholder, config }: InputType) => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder={placeholder} />
+      <TextInput style={styles.input} placeholder={placeholder} {...config} />
     </View>
   );
 };
