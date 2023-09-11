@@ -1,8 +1,8 @@
 import { View, Image, StyleSheet, Text } from "react-native";
 import {
-  getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 import Input from "../molecules/Input";
@@ -24,6 +24,7 @@ type FormType = {
 
 const Form = ({ information, type, navigation }: FormType) => {
   const [user, setUser] = useState<User>(new User());
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const auth = FIREBASE_AUTH;
 
   const userHandler = (identifier: string, value: string) => {
@@ -33,6 +34,10 @@ const Form = ({ information, type, navigation }: FormType) => {
     });
   };
 
+  const passwordHandler = (password: string) => {
+    setPasswordConfirm(password);
+  };
+
   const signIn = async () => {
     try {
       const resp = await signInWithEmailAndPassword(
@@ -40,7 +45,10 @@ const Form = ({ information, type, navigation }: FormType) => {
         user.email,
         user.password
       );
-      console.log(resp);
+
+      setTimeout(() => {
+        navigation.navigate("Tabs");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
@@ -55,6 +63,15 @@ const Form = ({ information, type, navigation }: FormType) => {
         user.email,
         user.password
       );
+
+      await updateProfile(auth.currentUser!, {
+        displayName: user.name,
+        photoURL: user.image,
+      });
+
+      setTimeout(() => {
+        navigation.navigate("Tabs");
+      }, 2000);
     } catch (err) {
       console.log(err);
     }
@@ -71,16 +88,6 @@ const Form = ({ information, type, navigation }: FormType) => {
       </View>
 
       <View style={styles.inputs}>
-        {type === "Sign up" ? (
-          <Input
-            placeholder="Name"
-            config={{
-              value: user.name,
-              onChangeText: userHandler.bind(this, "name"),
-            }}
-          />
-        ) : null}
-
         <Input
           placeholder="Email"
           config={{
@@ -88,6 +95,18 @@ const Form = ({ information, type, navigation }: FormType) => {
             onChangeText: userHandler.bind(this, "email"),
           }}
         />
+
+        {type === "Sign up" ? (
+          <>
+            <Input
+              placeholder="Name"
+              config={{
+                value: user.name,
+                onChangeText: userHandler.bind(this, "name"),
+              }}
+            />
+          </>
+        ) : null}
 
         <View>
           <Input
@@ -97,7 +116,19 @@ const Form = ({ information, type, navigation }: FormType) => {
               onChangeText: userHandler.bind(this, "password"),
             }}
           />
-          <Text style={styles.forgetPassword}>Forget your password?</Text>
+          {type === "Sign in" ? (
+            <Text style={styles.forgetPassword}>Forget your password?</Text>
+          ) : null}
+
+          {user.password !== "" ? (
+            <Input
+              placeholder="Password confirmation"
+              config={{
+                value: passwordConfirm,
+                onChangeText: passwordHandler,
+              }}
+            />
+          ) : null}
         </View>
       </View>
 
@@ -135,14 +166,13 @@ const Form = ({ information, type, navigation }: FormType) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "flex-start",
   },
 
   /////////
 
   informations: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
   },
 
   image: {
@@ -153,12 +183,12 @@ const styles = StyleSheet.create({
   subTitle: {
     color: colors.primary,
     fontSize: 25,
+    marginBottom: 8,
   },
 
   ////////
 
   inputs: {
-    flex: 1.5,
     justifyContent: "center",
   },
 
@@ -172,12 +202,11 @@ const styles = StyleSheet.create({
   ////////
 
   actions: {
-    flex: 1,
+    height: 75,
+    marginTop: 16,
   },
 
-  actionButton: {
-    flex: 0.3,
-  },
+  actionButton: {},
 });
 
 export default Form;

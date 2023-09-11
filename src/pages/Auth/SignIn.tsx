@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import Form from "../../components/organism/Form";
+import Form from "../../components/organism/AuthForm";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 
