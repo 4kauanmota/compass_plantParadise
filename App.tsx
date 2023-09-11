@@ -1,8 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 import StackNavigation from "./src/navigators/StackNavigation";
 import { useFonts } from "expo-font";
+import toastConfig from "./src/services/toastConfig";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -24,6 +26,8 @@ const App = () => {
       <NavigationContainer>
         <StackNavigation />
       </NavigationContainer>
+
+      <Toast config={toastConfig as any} />
     </>
   );
 };

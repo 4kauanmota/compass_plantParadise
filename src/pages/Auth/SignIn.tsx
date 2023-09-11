@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Toast from "react-native-toast-message";
 
 import Form from "../../components/organism/AuthForm";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -58,6 +59,11 @@ const SignIn = ({ navigation }: SignIn) => {
       setTimeout(() => {
         navigation.navigate("Tabs");
       }, 2000);
+
+      Toast.show({
+        type: "auth",
+        text1: "Sign in sucessful",
+      });
     } catch (err) {
       console.log(err);
     }
