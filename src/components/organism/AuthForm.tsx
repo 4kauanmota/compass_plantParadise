@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -46,7 +46,7 @@ const Form = ({
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} justify-content="flex-start">
       <View style={styles.informations}>
         <Image
           style={styles.image}
@@ -61,11 +61,13 @@ const Form = ({
             <>
               {user[key].errors.length ? (
                 <Text style={styles.errorMessage}>
-                  {user[key].errors.join(" | ")}
+                  {`${key.toUpperCase()}: ` + user[key].errors.join(" | ")}
                 </Text>
-              ) : null}
+              ) : (
+                <Text style={styles.label}>{`${key.toUpperCase()}:`}</Text>
+              )}
               <Input
-                placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                placeholder={`Type your ${key}`}
                 config={{
                   value: user[key].value,
                   onChangeText: inputHandler.bind(this, key),
@@ -104,14 +106,15 @@ const Form = ({
           />
         )}
       </View>
-    </View>
+
+      <View style={styles.footer}></View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
   },
 
   /////////
@@ -133,14 +136,23 @@ const styles = StyleSheet.create({
 
   ////////
 
-  errorMessage: {
-    color: colors.error,
-    fontFamily: fonts.secondary[400],
-    fontSize: 11,
-  },
-
   inputs: {
     justifyContent: "center",
+    paddingHorizontal: 24,
+  },
+
+  errorMessage: {
+    color: colors.error,
+    fontFamily: fonts.main[400],
+    fontSize: 13,
+    transform: [{ translateY: 7 }],
+  },
+
+  label: {
+    color: colors.font.light,
+    fontFamily: fonts.main[400],
+    fontSize: 13,
+    transform: [{ translateY: 7 }],
   },
 
   forgetPassword: {
@@ -155,9 +167,18 @@ const styles = StyleSheet.create({
   actions: {
     height: 75,
     marginTop: 16,
+    paddingHorizontal: 24,
   },
 
-  actionButton: {},
+  actionButton: {
+    flex: 1,
+  },
+
+  ////////
+
+  footer: {
+    padding: 8,
+  },
 });
 
 export default Form;
