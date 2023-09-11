@@ -3,14 +3,14 @@ import { TextInput, View, StyleSheet } from "react-native";
 import { colors, fonts } from "../../theme";
 
 type InputType = {
-  children?: any;
   placeholder?: string;
   config?: any;
+  isValid?: any;
 };
 
-const Input = ({ children, placeholder, config }: InputType) => {
+const Input = ({ placeholder, config, isValid = true }: InputType) => {
   return (
-    <View style={styles.container}>
+    <View style={isValid ? styles.container : [styles.container, styles.error]}>
       <TextInput style={styles.input} placeholder={placeholder} {...config} />
     </View>
   );
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.font.light + "aa",
     borderRadius: 4,
+  },
+
+  error: {
+    borderColor: colors.error,
   },
 
   input: {

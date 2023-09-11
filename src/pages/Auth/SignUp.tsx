@@ -9,6 +9,29 @@ type SignUpType = {
 };
 
 const SignUp = ({ navigation }: SignUpType) => {
+  const signUp = async () => {
+    console.log(user);
+
+    try {
+      const resp = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+
+      await updateProfile(auth.currentUser!, {
+        displayName: user.name,
+        photoURL: user.image,
+      });
+
+      setTimeout(() => {
+        navigation.navigate("Tabs");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Form

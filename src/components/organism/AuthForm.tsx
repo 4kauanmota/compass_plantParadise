@@ -10,70 +10,38 @@ import SubTitle from "../atoms/SubTitle";
 import { colors, fonts } from "../../theme";
 import TextButton from "../molecules/TextButton";
 import EndLinkText from "../atoms/EndLinkText";
-import { RootStackParamList } from "../../navigators/StackNavigation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import User from "../../models/User";
-import { FIREBASE_AUTH } from "../../services/firebaseConfig";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import ISignIn from "../../models/ISignIn";
 
 type FormType = {
   information: string;
   type: string;
+  onSubmit: any;
+  user: any;
+  setUser: any;
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
-const Form = ({ information, type, navigation }: FormType) => {
-  const [user, setUser] = useState<User>(new User());
-  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-  const auth = FIREBASE_AUTH;
-
-  const userHandler = (identifier: string, value: string) => {
-    setUser((act) => {
-      const newUser = { ...act, [identifier]: value };
-      return newUser as User;
-    });
-  };
-
-  const passwordHandler = (password: string) => {
-    setPasswordConfirm(password);
-  };
-
-  const signIn = async () => {
-    try {
-      const resp = await signInWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      );
-
-      setTimeout(() => {
-        navigation.navigate("Tabs");
-      }, 2000);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const signUp = async () => {
-    console.log(user);
-
-    try {
-      const resp = await createUserWithEmailAndPassword(
-        auth,
-        user.email,
-        user.password
-      );
-
-      await updateProfile(auth.currentUser!, {
-        displayName: user.name,
-        photoURL: user.image,
-      });
-
-      setTimeout(() => {
-        navigation.navigate("Tabs");
-      }, 2000);
-    } catch (err) {
-      console.log(err);
+const Form = ({
+  information,
+  type,
+  onSubmit,
+  user,
+  setUser,
+  navigation,
+}: FormType) => {
+  const inputHandler = (identifier?: string, value?: string) => {
+    if (identifier) {
+      const newUser = user;
+      newUser[identifier].value = value;
+      newUser[identifier].errors = [];
+      setUser({ ...newUser });
+    } else {
+      const newUser = user;
+      setUser({ ...newUser });
     }
   };
 
@@ -88,75 +56,52 @@ const Form = ({ information, type, navigation }: FormType) => {
       </View>
 
       <View style={styles.inputs}>
-        <Input
-          placeholder="Email"
-          config={{
-            value: user.email,
-            onChangeText: userHandler.bind(this, "email"),
-          }}
-        />
+        {Object.keys(user).map((key) => {
+          return (
+            <>
+              {user[key].errors.length ? (
+                <Text style={styles.errorMessage}>
+                  {user[key].errors.join(" | ")}
+                </Text>
+              ) : null}
+              <Input
+                placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                config={{
+                  value: user[key].value,
+                  onChangeText: inputHandler.bind(this, key),
+                }}
+                isValid={user[key].errors.length === 0 ? true : false}
+                key={key}
+              />
+            </>
+          );
+        })}
 
-        {type === "Sign up" ? (
-          <>
-            <Input
-              placeholder="Name"
-              config={{
-                value: user.name,
-                onChangeText: userHandler.bind(this, "name"),
-              }}
-            />
-          </>
+        {type === "Sign in" ? (
+          <Text style={styles.forgetPassword}>Forget your password?</Text>
         ) : null}
-
-        <View>
-          <Input
-            placeholder="Password"
-            config={{
-              value: user.password,
-              onChangeText: userHandler.bind(this, "password"),
-            }}
-          />
-          {type === "Sign in" ? (
-            <Text style={styles.forgetPassword}>Forget your password?</Text>
-          ) : null}
-
-          {user.password !== "" ? (
-            <Input
-              placeholder="Password confirmation"
-              config={{
-                value: passwordConfirm,
-                onChangeText: passwordHandler,
-              }}
-            />
-          ) : null}
-        </View>
       </View>
 
       <View style={styles.actions}>
+        <TextButton
+          style={styles.actionButton}
+          onPress={() => onSubmit(inputHandler)}
+        >
+          {type}
+        </TextButton>
+
         {type === "Sign up" ? (
-          <>
-            <TextButton style={styles.actionButton} onPress={signUp}>
-              {type}
-            </TextButton>
-
-            <EndLinkText
-              text="Already have an account?"
-              link="Sign in"
-              onPress={() => navigation.navigate("SignIn")}
-            />
-          </>
+          <EndLinkText
+            text="Already have an account?"
+            link="Sign in"
+            onPress={() => navigation.navigate("SignIn")}
+          />
         ) : (
-          <>
-            <TextButton style={styles.actionButton} onPress={signIn}>
-              {type}
-            </TextButton>
-
-            <EndLinkText
-              text="Don't have an account?"
-              link="Sign up"
-              onPress={() => navigation.navigate("SignUp")}
-            />
-          </>
+          <EndLinkText
+            text="Don't have an account?"
+            link="Sign up"
+            onPress={() => navigation.navigate("SignUp")}
+          />
         )}
       </View>
     </View>
@@ -187,6 +132,12 @@ const styles = StyleSheet.create({
   },
 
   ////////
+
+  errorMessage: {
+    color: colors.error,
+    fontFamily: fonts.secondary[400],
+    fontSize: 11,
+  },
 
   inputs: {
     justifyContent: "center",
