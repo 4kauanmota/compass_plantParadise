@@ -52,8 +52,10 @@ const SignUp = ({ navigation }: SignUpType) => {
 
     setUser(userErrors);
     if (
+      user!.name.errors?.length === 0 &&
       user!.email.errors?.length === 0 &&
-      user!.password.errors?.length === 0
+      user!.password.errors?.length === 0 &&
+      user!["password confirmation"].errors?.length === 0
     ) {
       signUp();
     }

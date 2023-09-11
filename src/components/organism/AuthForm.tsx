@@ -41,7 +41,7 @@ const Form = ({ type, onSubmit, user, setUser, navigation }: FormType) => {
       <View style={styles.inputs}>
         {Object.keys(user).map((key) => {
           return (
-            <View key={Math.random().toString()}>
+            <View key={key}>
               {user[key].errors.length ? (
                 <Text style={styles.errorMessage}>
                   {`${key.toUpperCase()}: ` + user[key].errors.join(" | ")}

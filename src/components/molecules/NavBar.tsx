@@ -38,9 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
 
-  left: {
-    height: 26,
-  },
+  left: {},
 
   center: {},
 
