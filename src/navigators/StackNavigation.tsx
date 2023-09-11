@@ -3,12 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Auth from "../pages/Auth/Auth";
 import Details from "../pages/Details";
 import BottomTabs from "./BottomTabs";
-import { colors, fonts } from "../theme";
+import { colors, fonts, shadow } from "../theme";
 import NavBar from "../components/molecules/NavBar";
 import SubTitle from "../components/atoms/SubTitle";
 import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
 import SignIn from "../pages/Auth/SignIn";
 import SignUp from "../pages/Auth/SignUp";
+import { View } from "react-native";
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -32,12 +33,14 @@ const StackNavigation = () => {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="SignIn"
         component={SignIn}
         options={{
           header: ({ navigation }) => (
             <NavBar
+              style={shadow.main}
               left={
                 <AnimatedIconButton
                   onPress={() => navigation.goBack()}
@@ -54,16 +57,22 @@ const StackNavigation = () => {
                   shadowOn={false}
                 />
               }
+              center={
+                <SubTitle textStyle={{ fontSize: 14 }}>Welcome back</SubTitle>
+              }
+              right={<View style={{ width: 26 }}></View>}
             />
           ),
         }}
       />
+
       <Stack.Screen
         name="SignUp"
         component={SignUp}
         options={{
           header: ({ navigation }) => (
             <NavBar
+              style={shadow.main}
               left={
                 <AnimatedIconButton
                   onPress={() => navigation.goBack()}
@@ -80,15 +89,21 @@ const StackNavigation = () => {
                   shadowOn={false}
                 />
               }
+              center={
+                <SubTitle textStyle={{ fontSize: 14 }}>Create account</SubTitle>
+              }
+              right={<View style={{ width: 26 }}></View>}
             />
           ),
         }}
       />
+
       <Stack.Screen
         name="Tabs"
         component={BottomTabs}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
         name="Details"
         component={Details}

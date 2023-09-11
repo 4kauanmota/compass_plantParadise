@@ -1,20 +1,11 @@
 import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
 
 import Input from "../molecules/Input";
-import SubTitle from "../atoms/SubTitle";
 import { colors, fonts } from "../../theme";
 import TextButton from "../molecules/TextButton";
 import EndLinkText from "../atoms/EndLinkText";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import User from "../../models/User";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
-import ISignIn from "../../models/ISignIn";
 
 type FormType = {
   information: string;
@@ -25,14 +16,7 @@ type FormType = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
-const Form = ({
-  information,
-  type,
-  onSubmit,
-  user,
-  setUser,
-  navigation,
-}: FormType) => {
+const Form = ({ type, onSubmit, user, setUser, navigation }: FormType) => {
   const inputHandler = (identifier?: string, value?: string) => {
     if (identifier) {
       const newUser = user;
@@ -52,13 +36,12 @@ const Form = ({
           style={styles.image}
           source={require("../../../assets/img/logo.png")}
         />
-        <SubTitle textStyle={styles.subTitle}>{information}</SubTitle>
       </View>
 
       <View style={styles.inputs}>
         {Object.keys(user).map((key) => {
           return (
-            <>
+            <View key={Math.random().toString()}>
               {user[key].errors.length ? (
                 <Text style={styles.errorMessage}>
                   {`${key.toUpperCase()}: ` + user[key].errors.join(" | ")}
@@ -73,9 +56,8 @@ const Form = ({
                   onChangeText: inputHandler.bind(this, key),
                 }}
                 isValid={user[key].errors.length === 0 ? true : false}
-                key={key}
               />
-            </>
+            </View>
           );
         })}
 
@@ -121,17 +103,12 @@ const styles = StyleSheet.create({
 
   informations: {
     alignItems: "center",
+    marginTop: 16,
   },
 
   image: {
     width: 100,
     height: 100,
-  },
-
-  subTitle: {
-    color: colors.primary,
-    fontSize: 25,
-    marginBottom: 8,
   },
 
   ////////
