@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { RootStackParamList } from "../navigators/StackNavigation";
 import { colors } from "../theme";
@@ -59,7 +58,7 @@ const Home = ({ navigation }: HomeType) => {
         />
       ),
     });
-  }, []);
+  }, [currentUser]);
 
   return (
     <VirtualizedList style={styles.container}>

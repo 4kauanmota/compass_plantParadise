@@ -12,6 +12,7 @@ import SignUp from "../pages/Auth/SignUp";
 import { View } from "react-native";
 import useUserStore from "../store/UserStore";
 import Profile from "../pages/User/Profile";
+import ProfileEdit from "../pages/User/ProfileEdit";
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -19,6 +20,7 @@ export type RootStackParamList = {
   SignUp: undefined;
   Tabs: undefined;
   Profile: undefined;
+  ProfileEdit: undefined;
   Details: { id: string };
 };
 
@@ -67,6 +69,42 @@ const StackNavigation = () => {
                       textStyle={{ fontFamily: fonts.main[600], fontSize: 14 }}
                     >
                       Profile
+                    </SubTitle>
+                  }
+                  right={<View style={{ width: 26 }}></View>}
+                />
+              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="ProfileEdit"
+            component={ProfileEdit}
+            options={{
+              header: ({ navigation }) => (
+                <NavBar
+                  style={shadow.main}
+                  left={
+                    <AnimatedIconButton
+                      onPress={() => navigation.goBack()}
+                      iconSize={26}
+                      iconActive={{
+                        icon: "chevron-left",
+                        color: colors.font.strong,
+                      }}
+                      iconDisable={{
+                        icon: "chevron-left",
+                        color: colors.font.strong,
+                      }}
+                      style={{ transform: [{ translateY: -4 }] }}
+                      shadowOn={false}
+                    />
+                  }
+                  center={
+                    <SubTitle
+                      textStyle={{ fontFamily: fonts.main[600], fontSize: 14 }}
+                    >
+                      Profile Edit
                     </SubTitle>
                   }
                   right={<View style={{ width: 26 }}></View>}

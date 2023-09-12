@@ -4,9 +4,15 @@ import useUserStore from "../../store/UserStore";
 import SubTitle from "../../components/atoms/SubTitle";
 import TextButton from "../../components/molecules/TextButton";
 import { colors, fonts } from "../../theme";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigators/StackNavigation";
 
-const Profile = () => {
-  const { currentUser } = useUserStore();
+type ProfileType = {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
+};
+
+const Profile = ({ navigation }: ProfileType) => {
+  const { currentUser, removeCurrentUser } = useUserStore();
 
   const image = currentUser?.image
     ? { uri: currentUser?.image }
@@ -25,10 +31,16 @@ const Profile = () => {
         </View>
 
         <View style={styles.actions}>
-          <TextButton textStyle={styles.actionButtonsText} onPress={() => null}>
+          <TextButton
+            textStyle={styles.actionButtonsText}
+            onPress={() => navigation.navigate("ProfileEdit")}
+          >
             Edit
           </TextButton>
-          <TextButton textStyle={styles.actionButtonsText} onPress={() => null}>
+          <TextButton
+            textStyle={styles.actionButtonsText}
+            onPress={() => removeCurrentUser()}
+          >
             Sign out
           </TextButton>
         </View>
@@ -58,12 +70,16 @@ const styles = StyleSheet.create({
   userArea: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: 14,
   },
 
   image: {
-    width: 80,
-    height: 80,
+    width: 79,
+    height: 79,
+
+    borderRadius: 40,
+    borderColor: colors.font.strong,
+    borderWidth: 1,
   },
 
   userData: {

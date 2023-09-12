@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 
 import { RootStackParamList } from "../../navigators/StackNavigation";
-import Form from "../../components/organism/AuthForm";
+import AuthForm from "../../components/organism/AuthForm";
 import ISignUp from "../../models/ISignUp";
 import { FIREBASE_AUTH } from "../../services/firebaseConfig";
 import emailValidator from "../../services/validator/emailValidator";
@@ -66,7 +66,7 @@ const SignUp = ({ navigation }: SignUpType) => {
 
   return (
     <View style={styles.container}>
-      <Form
+      <AuthForm
         information="Create account"
         type="Sign up"
         onSubmit={submitHandler}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-import Form from "../../components/organism/AuthForm";
+import AuthForm from "../../components/organism/AuthForm";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import ISignIn from "../../models/ISignIn";
@@ -48,7 +48,7 @@ const SignIn = ({ navigation }: SignIn) => {
 
   return (
     <View style={styles.container}>
-      <Form
+      <AuthForm
         information="Welcome back"
         type="Sign in"
         onSubmit={submitHandler}
