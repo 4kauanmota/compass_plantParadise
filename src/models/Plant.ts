@@ -1,29 +1,55 @@
 export default class Plant {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
+  private Id: string;
+  private Title: string;
+  private Description: string;
+  private Price: number;
+  private Category: string;
+  private CategoryId: string;
+  private Image: string;
 
-  constructor(id: string, name: string, price: number, image: string) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.image = image;
+  constructor(
+    Id: string,
+    Title: string,
+    Description: string,
+    Price: number,
+    Category: string,
+    CategoryId: string,
+    Image: string
+  ) {
+    this.Id = Id;
+    this.Title = Title;
+    this.Description = Description;
+    this.Price = Price;
+    this.Category = Category;
+    this.CategoryId = CategoryId;
+    this.Image = Image;
   }
 
-  get Id() {
-    return this.id;
+  get id() {
+    return this.Id;
   }
 
-  get Name() {
-    return this.name;
+  get title() {
+    return this.Title;
   }
 
-  get Price() {
-    return this.price;
+  get description() {
+    return this.Description;
   }
 
-  get Image() {
-    return this.image;
+  get price() {
+    return this.Price;
+  }
+
+  get category() {
+    return this.Category;
+  }
+
+  get categoryId() {
+    return this.CategoryId;
+  }
+
+  get image() {
+    return this.Image;
   }
 }
