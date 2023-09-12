@@ -21,7 +21,7 @@ const Home = ({ navigation }: HomeType) => {
   const [itemPlants, setItemPlants] = useState<IPlantsCard[]>();
 
   useEffect(() => {
-    const loadRestaurants = async () => {
+    const loadPlants = async () => {
       const fetchedPopularPlants: IPlantsCard[] =
         await fetchPopularPlantsCard();
       const fetchedItemPlants: IPlantsCard[] = await fetchItemPlantsCard();
@@ -30,7 +30,7 @@ const Home = ({ navigation }: HomeType) => {
       setItemPlants(fetchedItemPlants);
     };
 
-    loadRestaurants();
+    loadPlants();
   }, []);
 
   useEffect(() => {

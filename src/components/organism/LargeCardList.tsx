@@ -32,7 +32,7 @@ const LargeCardList = ({ plants }: LargeCardListType) => {
     }
 
     setFilteredPlants(selectedPlants);
-  }, [filterOptions]);
+  }, [filterOptions, setFilteredPlants, plants]);
 
   return (
     <View style={styles.container}>
