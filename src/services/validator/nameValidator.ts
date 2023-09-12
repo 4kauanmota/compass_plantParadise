@@ -1,5 +1,5 @@
 const nameValidator = (name: any) => {
-  const letters = /^[A-Za-z]+$/;
+  const letters = /^[A-Za-z ]+$/;
 
   if (name.value.length === 0) {
     name.errors.push("Cannot be empty");

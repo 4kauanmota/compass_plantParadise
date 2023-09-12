@@ -1,23 +1,24 @@
 import { View, StyleSheet } from "react-native";
-import Toast from "react-native-toast-message";
-
-import Form from "../../components/organism/AuthForm";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../navigators/StackNavigation";
 import { useState } from "react";
+
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import Form from "../../components/organism/AuthForm";
 import ISignUp from "../../models/ISignUp";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../services/firebaseConfig";
 import emailValidator from "../../services/validator/emailValidator";
 import passwordValidator from "../../services/validator/passwordValidator";
 import nameValidator from "../../services/validator/nameValidator";
 import passwordConfirmationValidator from "../../services/validator/passwordConfirmationValidator";
+import useUserStore from "../../store/UserStore";
+import signUpManager from "../../services/auth/signUpManager";
 
 type SignUpType = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
 const SignUp = ({ navigation }: SignUpType) => {
+  const { setCurrentUser } = useUserStore();
   const [user, setUser] = useState<ISignUp>({
     name: {
       value: "",
@@ -36,7 +37,6 @@ const SignUp = ({ navigation }: SignUpType) => {
       errors: new Array<string>(),
     },
   });
-
   const auth = FIREBASE_AUTH;
 
   const submitHandler = (inputHandler: any) => {
@@ -58,35 +58,10 @@ const SignUp = ({ navigation }: SignUpType) => {
       user!.password.errors?.length === 0 &&
       user!["password confirmation"].errors?.length === 0
     ) {
-      signUp();
+      signUpManager(user, navigation, setCurrentUser);
     }
 
     inputHandler();
-  };
-
-  const signUp = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        user.email.value,
-        user.password.value
-      );
-
-      await updateProfile(auth.currentUser!, {
-        displayName: user.name.value,
-      });
-
-      setTimeout(() => {
-        navigation.navigate("Tabs");
-      }, 2000);
-
-      Toast.show({
-        type: "auth",
-        text1: "Sign up sucessful",
-      });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (

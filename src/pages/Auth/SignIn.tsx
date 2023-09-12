@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import Toast from "react-native-toast-message";
 
 import Form from "../../components/organism/AuthForm";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
-import { FIREBASE_AUTH } from "../../services/firebaseConfig";
 import ISignIn from "../../models/ISignIn";
 import passwordValidator from "../../services/validator/passwordValidator";
 import emailValidator from "../../services/validator/emailValidator";
+import signInManager from "../../services/auth/signInManager";
+import useUserStore from "../../store/UserStore";
 
 type SignIn = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
 const SignIn = ({ navigation }: SignIn) => {
+  const { setCurrentUser } = useUserStore();
   const [user, setUser] = useState<ISignIn>({
     email: {
       value: "",
@@ -26,8 +26,6 @@ const SignIn = ({ navigation }: SignIn) => {
       errors: new Array<string>(),
     },
   });
-
-  const auth = FIREBASE_AUTH;
 
   const submitHandler = (inputHandler: any) => {
     const userErrors = user;
@@ -42,31 +40,10 @@ const SignIn = ({ navigation }: SignIn) => {
       user!.email.errors?.length === 0 &&
       user!.password.errors?.length === 0
     ) {
-      signIn();
+      signInManager(user, navigation, setCurrentUser);
     }
 
     inputHandler();
-  };
-
-  const signIn = async () => {
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        user!.email.value,
-        user!.password.value
-      );
-
-      setTimeout(() => {
-        navigation.navigate("Tabs");
-      }, 2000);
-
-      Toast.show({
-        type: "auth",
-        text1: "Sign in sucessful",
-      });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (

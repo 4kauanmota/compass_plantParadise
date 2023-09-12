@@ -1,18 +1,11 @@
 export default class User {
   private Name: string;
   private Email: string;
-  private Password: string;
   private Image: string;
 
-  constructor(
-    Name: string = "",
-    Email: string = "",
-    Password: string = "",
-    Image: string = ""
-  ) {
+  constructor(Name: string = "", Email: string = "", Image: string = "") {
     this.Name = Name;
     this.Email = Email;
-    this.Password = Password;
     this.Image = Image;
   }
 
@@ -22,10 +15,6 @@ export default class User {
 
   get email() {
     return this.Email;
-  }
-
-  get password() {
-    return this.Password;
   }
 
   get image() {

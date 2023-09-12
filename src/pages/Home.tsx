@@ -11,6 +11,7 @@ import VirtualizedList from "../components/atoms/VirtualizedList";
 import NavBar from "../components/molecules/NavBar";
 import SubTitle from "../components/atoms/SubTitle";
 import { fetchItemPlantsCard, fetchPopularPlantsCard } from "../api/plantsApi";
+import useUserStore from "../store/UserStore";
 
 type HomeType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
@@ -19,6 +20,7 @@ type HomeType = {
 const Home = ({ navigation }: HomeType) => {
   const [popularPlants, setPopularPlants] = useState<IPlantsCard[]>();
   const [itemPlants, setItemPlants] = useState<IPlantsCard[]>();
+  const { currentUser } = useUserStore();
 
   useEffect(() => {
     const loadPlants = async () => {
@@ -37,7 +39,7 @@ const Home = ({ navigation }: HomeType) => {
     navigation.setOptions({
       header: () => (
         <NavBar
-          left={<SubTitle>Hi, John</SubTitle>}
+          left={<SubTitle>{currentUser.name}</SubTitle>}
           right={
             <MaterialCommunityIcons
               name="account-circle-outline"
