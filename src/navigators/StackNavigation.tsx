@@ -27,12 +27,6 @@ const StackNavigation = () => {
       screenOptions={{ contentStyle: { backgroundColor: colors.background } }}
     >
       <Stack.Screen
-        name="Tabs"
-        component={BottomTabs}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
         name="Auth"
         component={Auth}
         options={{
@@ -102,6 +96,12 @@ const StackNavigation = () => {
             />
           ),
         }}
+      />
+
+      <Stack.Screen
+        name="Tabs"
+        component={BottomTabs}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen

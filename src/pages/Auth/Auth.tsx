@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { RootStackParamList } from "../../navigators/StackNavigation";
@@ -11,6 +11,9 @@ type AuthType = {
 };
 
 const Auth = ({ navigation }: AuthType) => {
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +31,13 @@ const Auth = ({ navigation }: AuthType) => {
           </Text>
         </View>
 
-        <View style={styles.actions}>
+        <View
+          style={
+            windowWidth > windowHeight
+              ? [styles.actions, { flexDirection: "row" }]
+              : styles.actions
+          }
+        >
           <TextButton onPress={() => navigation.navigate("SignIn")}>
             Sign In
           </TextButton>
