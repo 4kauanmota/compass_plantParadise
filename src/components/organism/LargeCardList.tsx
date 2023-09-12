@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 
 import LargeCard from "../molecules/LargeCard";
 import TextOptions from "../atoms/TextOptions";
-import { RootStackParamList } from "../../navigators/StackNavigation";
 
 type LargeCardListType = {
   plants?: IPlantsCard[];
@@ -40,15 +38,18 @@ const LargeCardList = ({ plants }: LargeCardListType) => {
         filterOptions={filterOptions}
         setFilterOptions={setFilterOptions}
       />
-
-      <FlatList
-        data={filterdPlants}
-        renderItem={({ item }) => <LargeCard plant={item} />}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={<></>}
-        style={styles.list}
-      />
+      {filterdPlants ? (
+        <FlatList
+          data={filterdPlants}
+          renderItem={({ item }) => <LargeCard plant={item} />}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={<></>}
+          style={styles.list}
+        />
+      ) : (
+        <ActivityIndicator size={60} style={{ width: "100%", height: 278 }} />
+      )}
     </View>
   );
 };

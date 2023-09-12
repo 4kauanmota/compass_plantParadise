@@ -1,6 +1,5 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 
-import Plant from "../../models/Plant";
 import TinyCard from "../molecules/TinyCard";
 import SubTitle from "../atoms/SubTitle";
 
@@ -16,15 +15,19 @@ const TinyCardList = ({ children, plants }: TinyCardListType) => {
         {children}
       </SubTitle>
 
-      <FlatList
-        data={plants}
-        renderItem={({ item }) => <TinyCard plant={item} />}
-        keyExtractor={(item) => item.id}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        ListFooterComponent={<View style={{ paddingRight: 32 }}></View>}
-        style={styles.list}
-      />
+      {plants ? (
+        <FlatList
+          data={plants}
+          renderItem={({ item }) => <TinyCard plant={item} />}
+          keyExtractor={(item) => item.id}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ListFooterComponent={<View style={{ paddingRight: 32 }}></View>}
+          style={styles.list}
+        />
+      ) : (
+        <ActivityIndicator size={40} style={{ width: 287, height: 140 }} />
+      )}
     </>
   );
 };
