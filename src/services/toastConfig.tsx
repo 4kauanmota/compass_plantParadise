@@ -29,11 +29,11 @@ const toastConfig = {
     <View
       style={{
         height: 60,
-        width: "65%",
+        width: "60%",
         backgroundColor: colors.secondary,
         borderRadius: 16,
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-evenly",
       }}
     >
       <Image

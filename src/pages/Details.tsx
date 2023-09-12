@@ -57,7 +57,7 @@ const Details = ({ route }: { route: any }) => {
               active={true}
               tHeight={0}
               tWidth={0}
-              pRows={10}
+              pRows={30}
               pWidth={["100%", 72, 231, "100%"]}
               pHeight={[247, 24, 24, 19]}
             />
