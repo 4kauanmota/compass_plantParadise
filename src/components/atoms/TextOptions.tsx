@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors, fonts } from "../../theme";
 import PressArea from "./PressArea";
 
 type TextOptionsType = {
-  options: ITextOptions[];
+  filterOptions: ITextOptions[];
+  setFilterOptions: any;
 };
 
-const TextOptions = ({ options }: TextOptionsType) => {
-  const [filterOptions, setFilterOptions] = useState<ITextOptions[]>(options);
-
+const TextOptions = ({ filterOptions, setFilterOptions }: TextOptionsType) => {
   const handleClick = (index: number) => {
     const newOptions = filterOptions.map((el, i) => ({
       ...el,

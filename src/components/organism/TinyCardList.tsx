@@ -6,7 +6,7 @@ import SubTitle from "../atoms/SubTitle";
 
 type TinyCardListType = {
   children: string;
-  plants: Plant[];
+  plants?: IPlantsCard[];
 };
 
 const TinyCardList = ({ children, plants }: TinyCardListType) => {
@@ -19,7 +19,7 @@ const TinyCardList = ({ children, plants }: TinyCardListType) => {
       <FlatList
         data={plants}
         renderItem={({ item }) => <TinyCard plant={item} />}
-        keyExtractor={(item) => item.Id}
+        keyExtractor={(item) => item.id}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         ListFooterComponent={<View style={{ paddingRight: 32 }}></View>}

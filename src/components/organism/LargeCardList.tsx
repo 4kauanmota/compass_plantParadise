@@ -1,29 +1,49 @@
+import { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import Plant from "../../models/Plant";
 import LargeCard from "../molecules/LargeCard";
 import TextOptions from "../atoms/TextOptions";
 
 type LargeCardListType = {
   children: string;
-  plants: Plant[];
+  plants?: IPlantsCard[];
 };
 
 const LargeCardList = ({ children, plants }: LargeCardListType) => {
-  const filterOptions: ITextOptions[] = [
+  const [filterdPlants, setFilteredPlants] = useState<IPlantsCard[]>();
+
+  const [filterOptions, setFilterOptions] = useState<ITextOptions[]>([
     { text: "All", selected: true },
     { text: "Indoor", selected: false },
-    { text: "OutDoor", selected: false },
-  ];
+    { text: "Outdoor", selected: false },
+  ]);
+
+  useEffect(() => {
+    const selectedOption = filterOptions.filter((opt) => opt.selected)[0];
+
+    let selectedPlants;
+    if (selectedOption.text === "All") {
+      selectedPlants = plants;
+    } else {
+      selectedPlants = plants?.filter(
+        (plant) => plant.category === selectedOption.text
+      );
+    }
+
+    setFilteredPlants(selectedPlants);
+  }, [filterOptions]);
 
   return (
     <View style={styles.container}>
-      <TextOptions options={filterOptions} />
+      <TextOptions
+        filterOptions={filterOptions}
+        setFilterOptions={setFilterOptions}
+      />
 
       <FlatList
-        data={plants}
+        data={filterdPlants}
         renderItem={({ item }) => <LargeCard plant={item} />}
-        keyExtractor={(item) => item.Id}
+        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         ListFooterComponent={<></>}
         style={styles.list}

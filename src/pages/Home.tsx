@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,32 +11,28 @@ import LargeCardList from "../components/organism/LargeCardList";
 import VirtualizedList from "../components/atoms/VirtualizedList";
 import NavBar from "../components/molecules/NavBar";
 import SubTitle from "../components/atoms/SubTitle";
+import { fetchItemPlantsCard, fetchPopularPlantsCard } from "../api/plantsApi";
 
 type HomeType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
 };
 
 const Home = ({ navigation }: HomeType) => {
-  const p = new Plant(
-    "1",
-    "Plant",
-    2000,
-    "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
-  );
+  const [popularPlants, setPopularPlants] = useState<IPlantsCard[]>();
+  const [itemPlants, setItemPlants] = useState<IPlantsCard[]>();
 
-  const p2 = new Plant(
-    "2",
-    "Plant",
-    2000,
-    "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
-  );
+  useEffect(() => {
+    const loadRestaurants = async () => {
+      const fetchedPopularPlants: IPlantsCard[] =
+        await fetchPopularPlantsCard();
+      const fetchedItemPlants: IPlantsCard[] = await fetchItemPlantsCard();
 
-  const p3 = new Plant(
-    "3",
-    "Plant",
-    2000,
-    "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
-  );
+      setPopularPlants(fetchedPopularPlants);
+      setItemPlants(fetchedItemPlants);
+    };
+
+    loadRestaurants();
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -59,11 +55,11 @@ const Home = ({ navigation }: HomeType) => {
     <VirtualizedList style={styles.container}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TinyCardList plants={[p, p2, p3]}>Most popular</TinyCardList>
+          <TinyCardList plants={popularPlants}>Most popular</TinyCardList>
         </View>
 
         <View style={styles.main}>
-          <LargeCardList plants={[p, p2, p3]}>All Indoor Outdoor</LargeCardList>
+          <LargeCardList plants={itemPlants}>All Indoor Outdoor</LargeCardList>
         </View>
       </View>
     </VirtualizedList>

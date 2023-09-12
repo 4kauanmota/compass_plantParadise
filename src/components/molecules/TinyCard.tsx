@@ -6,7 +6,7 @@ import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 
 type TinyCardType = {
-  plant: Plant;
+  plant: IPlantsCard;
 };
 
 const TinyCard = ({ plant }: TinyCardType) => {
@@ -14,7 +14,7 @@ const TinyCard = ({ plant }: TinyCardType) => {
     <View style={[styles.container, shadow.main, { margin: 8 }]}>
       <View style={[styles.container]}>
         <View style={styles.preview}>
-          <Image style={styles.image} source={{ uri: plant.Image }} />
+          <Image style={styles.image} source={{ uri: plant.image }} />
           <AnimatedIconButton
             onPress={() => console.log("oi")}
             style={styles.favoriteButton}
@@ -25,8 +25,8 @@ const TinyCard = ({ plant }: TinyCardType) => {
 
         <View style={styles.details}>
           <View style={styles.description}>
-            <Text style={styles.name}>{plant.Name}</Text>
-            <Text style={styles.price}>${plant.Price}</Text>
+            <Text style={styles.name}>{plant.title}</Text>
+            <Text style={styles.price}>${plant.price}</Text>
           </View>
 
           <View style={styles.action}>

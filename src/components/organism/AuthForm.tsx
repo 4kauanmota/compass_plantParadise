@@ -30,7 +30,11 @@ const Form = ({ type, onSubmit, user, setUser, navigation }: FormType) => {
   };
 
   return (
-    <ScrollView style={styles.container} justify-content="flex-start">
+    <ScrollView
+      style={styles.container}
+      justify-content="flex-start"
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.informations}>
         <Image
           style={styles.image}

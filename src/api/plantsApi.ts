@@ -20,7 +20,8 @@ export async function fetchPopularPlantsCard(): Promise<Array<IPlantsCard>> {
       id: plant.id,
       title: plant.title,
       price: plant.price,
-      categoryId: plant.categoryId,
+      category: plant.category,
+      image: plant.image,
     };
     plants.push(plantCard);
   });
@@ -39,7 +40,8 @@ export async function fetchItemPlantsCard(): Promise<Array<IPlantsCard>> {
       id: plant.id,
       title: plant.title,
       price: plant.price,
-      categoryId: plant.categoryId,
+      category: plant.category,
+      image: plant.image,
     };
     plants.push(plantCard);
   });

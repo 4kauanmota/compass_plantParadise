@@ -2,5 +2,6 @@ interface IPlantsCard {
   id: string;
   title: string;
   price: number;
-  categoryId: string;
+  category: string;
+  image: string;
 }

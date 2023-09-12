@@ -1,12 +1,10 @@
 import { View, StyleSheet, Image, Text, Platform } from "react-native";
 
-import Plant from "../../models/Plant";
-import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 
 type LargeCardType = {
-  plant: Plant;
+  plant: IPlantsCard;
 };
 
 const LargeCard = ({ plant }: LargeCardType) => {
@@ -14,7 +12,7 @@ const LargeCard = ({ plant }: LargeCardType) => {
     <View style={[styles.container, shadow.main]}>
       <View style={[styles.container]}>
         <View style={styles.preview}>
-          <Image style={styles.image} source={{ uri: plant.Image }} />
+          <Image style={styles.image} source={{ uri: plant.image }} />
           <AnimatedIconButton
             onPress={() => console.log("oi")}
             style={styles.favoriteButton}
@@ -25,13 +23,13 @@ const LargeCard = ({ plant }: LargeCardType) => {
 
         <View style={styles.details}>
           <View style={styles.description}>
-            <Text style={styles.name}>{plant.Name}</Text>
-            <Text style={styles.price}>${plant.Price}</Text>
+            <Text style={styles.name}>{plant.title}</Text>
+            <Text style={styles.price}>${plant.price}</Text>
           </View>
 
           <View style={styles.action}>
             <AnimatedIconButton
-              onPress={() => console.log("oi")}
+              onPress={() => null}
               style={styles.buyButton}
               iconActive={{ icon: "shopping", color: colors.background }}
               iconDisable={{
