@@ -1,46 +1,58 @@
 import { View, StyleSheet, Image, Text, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import PressArea from "../atoms/PressArea";
 
 type LargeCardType = {
   plant: IPlantsCard;
 };
 
 const LargeCard = ({ plant }: LargeCardType) => {
-  return (
-    <View style={[styles.container, shadow.main]}>
-      <View style={[styles.container]}>
-        <View style={styles.preview}>
-          <Image style={styles.image} source={{ uri: plant.image }} />
-          <AnimatedIconButton
-            onPress={() => console.log("oi")}
-            style={styles.favoriteButton}
-            iconActive={{ icon: "heart", color: colors.primary }}
-            iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
-          />
-        </View>
+  const navigation: NativeStackNavigationProp<RootStackParamList> =
+    useNavigation();
 
-        <View style={styles.details}>
-          <View style={styles.description}>
-            <Text style={styles.name}>{plant.title}</Text>
-            <Text style={styles.price}>${plant.price}</Text>
+  return (
+    <PressArea
+      style={[{ flex: 1, borderRadius: 8 }, shadow.main]}
+      onPress={() => navigation.navigate("Details", { id: plant.id })}
+    >
+      <View style={[styles.container]}>
+        <View style={[styles.container]}>
+          <View style={styles.preview}>
+            <Image style={styles.image} source={{ uri: plant.image }} />
+            <AnimatedIconButton
+              onPress={() => console.log("oi")}
+              style={styles.favoriteButton}
+              iconActive={{ icon: "heart", color: colors.primary }}
+              iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
+            />
           </View>
 
-          <View style={styles.action}>
-            <AnimatedIconButton
-              onPress={() => null}
-              style={styles.buyButton}
-              iconActive={{ icon: "shopping", color: colors.background }}
-              iconDisable={{
-                icon: "shopping-outline",
-                color: colors.background,
-              }}
-            />
+          <View style={styles.details}>
+            <View style={styles.description}>
+              <Text style={styles.name}>{plant.title}</Text>
+              <Text style={styles.price}>${plant.price}</Text>
+            </View>
+
+            <View style={styles.action}>
+              <AnimatedIconButton
+                onPress={() => null}
+                style={styles.buyButton}
+                iconActive={{ icon: "shopping", color: colors.background }}
+                iconDisable={{
+                  icon: "shopping-outline",
+                  color: colors.background,
+                }}
+              />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </PressArea>
   );
 };
 

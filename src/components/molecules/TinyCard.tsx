@@ -1,45 +1,57 @@
 import { View, StyleSheet, Image, Text, Platform } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Plant from "../../models/Plant";
 import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
+import { RootStackParamList } from "../../navigators/StackNavigation";
+import PressArea from "../atoms/PressArea";
 
 type TinyCardType = {
   plant: IPlantsCard;
 };
 
 const TinyCard = ({ plant }: TinyCardType) => {
-  return (
-    <View style={[styles.container, shadow.main, { margin: 8 }]}>
-      <View style={[styles.container]}>
-        <View style={styles.preview}>
-          <Image style={styles.image} source={{ uri: plant.image }} />
-          <AnimatedIconButton
-            onPress={() => console.log("oi")}
-            style={styles.favoriteButton}
-            iconActive={{ icon: "heart", color: colors.primary }}
-            iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
-          />
-        </View>
+  const navigation: NativeStackNavigationProp<RootStackParamList> =
+    useNavigation();
 
-        <View style={styles.details}>
-          <View style={styles.description}>
-            <Text style={styles.name}>{plant.title}</Text>
-            <Text style={styles.price}>${plant.price}</Text>
+  return (
+    <PressArea
+      style={[{ flex: 1, borderRadius: 8 }]}
+      onPress={() => navigation.navigate("Details", { id: plant.id })}
+    >
+      <View style={[styles.container, shadow.main, { margin: 8 }]}>
+        <View style={[styles.container]}>
+          <View style={styles.preview}>
+            <Image style={styles.image} source={{ uri: plant.image }} />
+            <AnimatedIconButton
+              onPress={() => console.log("oi")}
+              style={styles.favoriteButton}
+              iconActive={{ icon: "heart", color: colors.primary }}
+              iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
+            />
           </View>
 
-          <View style={styles.action}>
-            <TextButton
-              textStyle={{ fontSize: 12 }}
-              onPress={() => console.log("hello world")}
-            >
-              Add to cart
-            </TextButton>
+          <View style={styles.details}>
+            <View style={styles.description}>
+              <Text style={styles.name}>{plant.title}</Text>
+              <Text style={styles.price}>${plant.price}</Text>
+            </View>
+
+            <View style={styles.action}>
+              <TextButton
+                textStyle={{ fontSize: 12 }}
+                onPress={() => console.log("hello world")}
+              >
+                Add to cart
+              </TextButton>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </PressArea>
   );
 };
 

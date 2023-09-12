@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import LargeCard from "../molecules/LargeCard";
 import TextOptions from "../atoms/TextOptions";
+import { RootStackParamList } from "../../navigators/StackNavigation";
 
 type LargeCardListType = {
-  children: string;
   plants?: IPlantsCard[];
 };
 
-const LargeCardList = ({ children, plants }: LargeCardListType) => {
+const LargeCardList = ({ plants }: LargeCardListType) => {
   const [filterdPlants, setFilteredPlants] = useState<IPlantsCard[]>();
 
   const [filterOptions, setFilterOptions] = useState<ITextOptions[]>([

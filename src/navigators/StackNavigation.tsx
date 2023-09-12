@@ -16,7 +16,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
   Tabs: undefined;
-  Details: { id: number };
+  Details: { id: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,6 +26,12 @@ const StackNavigation = () => {
     <Stack.Navigator
       screenOptions={{ contentStyle: { backgroundColor: colors.background } }}
     >
+      <Stack.Screen
+        name="Tabs"
+        component={BottomTabs}
+        options={{ headerShown: false }}
+      />
+
       <Stack.Screen
         name="Auth"
         component={Auth}
@@ -96,12 +102,6 @@ const StackNavigation = () => {
             />
           ),
         }}
-      />
-
-      <Stack.Screen
-        name="Tabs"
-        component={BottomTabs}
-        options={{ headerShown: false }}
       />
 
       <Stack.Screen

@@ -48,3 +48,15 @@ export async function fetchItemPlantsCard(): Promise<Array<IPlantsCard>> {
 
   return plants;
 }
+
+export async function fetchPlantById(id: string): Promise<Plant> {
+  const response = await axios.get(API);
+  let data = response.data.body.data.mostPopular;
+  const data2 = response.data.body.data.items;
+
+  data = [...data, ...data2];
+
+  const plant = data.filter((plant: Plant) => plant.id === id)[0];
+
+  return plant;
+}

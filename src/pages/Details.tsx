@@ -1,55 +1,46 @@
 import { StyleSheet, View, Image, Text, ScrollView } from "react-native";
-import Plant from "../models/Plant";
+
 import AddToCart from "../components/molecules/AddToCart";
 import IncDecControl from "../components/molecules/IncDecControl";
 import SubTitle from "../components/atoms/SubTitle";
 import { colors, fonts } from "../theme";
+import { useEffect, useState } from "react";
+import Plant from "../models/Plant";
+import { fetchPlantById } from "../api/plantsApi";
 
-const Details = () => {
-  const p = new Plant(
-    "1",
-    "Plant",
-    2000,
-    "https://watchandlearn.scholastic.com/content/dam/classroom-magazines/watchandlearn/videos/animals-and-plants/plants/what-are-plants-/What-Are-Plants.jpg"
-  );
+const Details = ({ route }: { route: any }) => {
+  const [plant, setPlant] = useState<Plant>();
 
+  useEffect(() => {
+    const loadPlant = async () => {
+      const plantId = route.params.id;
+      const fetchedPlant = await fetchPlantById(plantId);
+      setPlant(fetchedPlant);
+    };
+
+    loadPlant();
+  }, []);
   return (
     <>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.preview}>
-            <Image style={styles.image} source={{ uri: p.Image }} />
+            <Image style={styles.image} source={{ uri: plant?.image }} />
           </View>
 
           <View style={styles.main}>
             <View style={styles.buyArea}>
-              <Text style={styles.category}>Plant pot</Text>
-              <SubTitle style={styles.subTitle}>Plastic plant pot</SubTitle>
+              <Text style={styles.category}>{plant?.category}</Text>
+              <SubTitle style={styles.subTitle}>{plant?.title}</SubTitle>
 
               <View style={styles.priceControl}>
-                <Text style={styles.price}>$9.20</Text>
+                <Text style={styles.price}>${plant?.price}</Text>
                 <IncDecControl style={styles.incDecControl} />
               </View>
             </View>
 
             <View style={styles.description}>
-              <Text style={styles.descriptionText}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui,
-                repellat necessitatibus! Sapiente iusto at distinctio in
-                voluptates vel tempore, ipsum nobis sint, aliquid nihil eos
-                reiciendis optio temporibus rerum enim. Obcaecati cum
-                reprehenderit illum ducimus quae iste quia, consequuntur eveniet
-                sapiente ab molestiae quaerat similique et, minima dolorum
-                aliquid! Facere autem nisi nesciunt. Pariatur ab minima eum
-                molestias voluptatibus veritatis. Quibusdam dolor nisi, commodi
-                necessitatibus eaque, dignissimos incidunt rem in similique
-                explicabo iusto deleniti ab ad totam natus blanditiis assumenda
-                animi expedita unde tenetur illo? Ut optio expedita saepe
-                corrupti. Praesentium aliquid a nihil tenetur, adipisci sit
-                consectetur. Qui deserunt possimus eius reiciendis. Maxime eaque
-                repellat deserunt asperiores quae animi dignissimos ad minus
-                optio distinctio perferendis atque, praesentium suscipit beatae.
-              </Text>
+              <Text style={styles.descriptionText}>{plant?.description}</Text>
             </View>
           </View>
         </View>

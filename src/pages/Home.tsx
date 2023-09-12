@@ -5,7 +5,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { RootStackParamList } from "../navigators/StackNavigation";
 import { colors } from "../theme";
-import Plant from "../models/Plant";
 import TinyCardList from "../components/organism/TinyCardList";
 import LargeCardList from "../components/organism/LargeCardList";
 import VirtualizedList from "../components/atoms/VirtualizedList";
@@ -59,7 +58,7 @@ const Home = ({ navigation }: HomeType) => {
         </View>
 
         <View style={styles.main}>
-          <LargeCardList plants={itemPlants}>All Indoor Outdoor</LargeCardList>
+          <LargeCardList plants={itemPlants} />
         </View>
       </View>
     </VirtualizedList>
