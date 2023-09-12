@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, Text, ScrollView } from "react-native";
+import ContentLoader from "react-native-easy-content-loader";
 
 import AddToCart from "../components/molecules/AddToCart";
 import IncDecControl from "../components/molecules/IncDecControl";
@@ -15,34 +16,52 @@ const Details = ({ route }: { route: any }) => {
     const loadPlant = async () => {
       const plantId = route.params.id;
       const fetchedPlant = await fetchPlantById(plantId);
-      setPlant(fetchedPlant);
+      setTimeout(() => {
+        setPlant(fetchedPlant);
+      }, 1000);
     };
 
     loadPlant();
   }, []);
+
   return (
     <>
       <ScrollView>
         <View style={styles.container}>
-          <View style={styles.preview}>
-            <Image style={styles.image} source={{ uri: plant?.image }} />
-          </View>
-
-          <View style={styles.main}>
-            <View style={styles.buyArea}>
-              <Text style={styles.category}>{plant?.category}</Text>
-              <SubTitle style={styles.subTitle}>{plant?.title}</SubTitle>
-
-              <View style={styles.priceControl}>
-                <Text style={styles.price}>${plant?.price}</Text>
-                <IncDecControl style={styles.incDecControl} />
+          {plant ? (
+            <>
+              <View style={styles.preview}>
+                <Image style={styles.image} source={{ uri: plant?.image }} />
               </View>
-            </View>
 
-            <View style={styles.description}>
-              <Text style={styles.descriptionText}>{plant?.description}</Text>
-            </View>
-          </View>
+              <View style={styles.main}>
+                <View style={styles.buyArea}>
+                  <Text style={styles.category}>{plant?.category}</Text>
+                  <SubTitle style={styles.subTitle}>{plant?.title}</SubTitle>
+
+                  <View style={styles.priceControl}>
+                    <Text style={styles.price}>${plant?.price}</Text>
+                    <IncDecControl style={styles.incDecControl} />
+                  </View>
+                </View>
+
+                <View style={styles.description}>
+                  <Text style={styles.descriptionText}>
+                    {plant?.description}
+                  </Text>
+                </View>
+              </View>
+            </>
+          ) : (
+            <ContentLoader
+              active={true}
+              tHeight={0}
+              tWidth={0}
+              pRows={10}
+              pWidth={["100%", 72, 231, "100%"]}
+              pHeight={[247, 24, 24, 19]}
+            />
+          )}
         </View>
       </ScrollView>
 
