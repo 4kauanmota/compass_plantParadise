@@ -12,6 +12,7 @@ import NavBar from "../components/molecules/NavBar";
 import SubTitle from "../components/atoms/SubTitle";
 import { fetchItemPlantsCard, fetchPopularPlantsCard } from "../api/plantsApi";
 import useUserStore from "../store/UserStore";
+import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
 
 type HomeType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
@@ -39,12 +40,20 @@ const Home = ({ navigation }: HomeType) => {
     navigation.setOptions({
       header: () => (
         <NavBar
-          left={<SubTitle>{currentUser.name}</SubTitle>}
+          left={<SubTitle>{currentUser?.name}</SubTitle>}
           right={
-            <MaterialCommunityIcons
-              name="account-circle-outline"
-              size={30}
-              color="black"
+            <AnimatedIconButton
+              iconSize={30}
+              iconActive={{
+                icon: "account-circle-outline",
+                color: colors.font.strong,
+              }}
+              iconDisable={{
+                icon: "account-circle-outline",
+                color: colors.font.strong,
+              }}
+              onPress={() => navigation.navigate("Profile")}
+              shadowOn={false}
             />
           }
         />

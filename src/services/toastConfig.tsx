@@ -38,7 +38,7 @@ const toastConfig = {
     >
       <Image
         style={{ width: 60, height: 60 }}
-        source={require("../../assets/img/sucess2.gif")}
+        source={require("../../assets/img/sucess.gif")}
       />
       <View
         style={{
