@@ -28,15 +28,7 @@ export const increaseCartPlantHandler = (state: any, actPlant: Plant) => {
       ),
     ];
   } else {
-    state.addCartPlant(actPlant);
-
-    return [
-      ...state.cartPlants!.map((plant: Plant) =>
-        plant.id === actPlant.id
-          ? { ...plant, quantity: ++plant.quantity }
-          : { ...plant }
-      ),
-    ];
+    return [...state.cartPlants!, { ...actPlant, quantity: 1 }];
   }
 };
 

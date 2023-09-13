@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 
 import AnimatedIconButton from "./AnimatedIconButton";
@@ -12,12 +12,26 @@ type IncDecControlType = {
 };
 
 const IncDecControl = ({ style, plant }: IncDecControlType) => {
-  const { increaseCartPlant, decreaseCartPlant } = usePlantsStore();
+  const { cartPlants, increaseCartPlant, decreaseCartPlant } = usePlantsStore();
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    if (plant) {
+      const plantAtt = cartPlants?.find((curPlant) => curPlant.id === plant.id);
+      if (plantAtt) {
+        plant.quantity = plantAtt?.quantity;
+        setQuantity(plantAtt.quantity);
+      } else {
+        plant.quantity = 0;
+        setQuantity(0);
+      }
+    }
+  }, [cartPlants, plant]);
 
   return (
     <View style={[styles.container, style]}>
       <View style={styles.button}>
-        {plant.quantity > 1 ? (
+        {quantity > 1 ? (
           <AnimatedIconButton
             onPress={() => decreaseCartPlant(plant)}
             style={styles.decreaseButton}
@@ -26,7 +40,7 @@ const IncDecControl = ({ style, plant }: IncDecControlType) => {
             iconActive={{ icon: "remove", color: colors.primary }}
             iconDisable={{ icon: "remove", color: colors.primary }}
           />
-        ) : (
+        ) : quantity === 1 ? (
           <AnimatedIconButton
             onPress={() => decreaseCartPlant(plant)}
             style={styles.deleteButton}
@@ -34,10 +48,12 @@ const IncDecControl = ({ style, plant }: IncDecControlType) => {
             iconActive={{ icon: "delete-outline", color: colors.error }}
             iconDisable={{ icon: "delete-outline", color: colors.error }}
           />
+        ) : (
+          <View style={{ width: 20, height: 20 }}></View>
         )}
       </View>
 
-      <Text style={styles.quantity}>{plant.quantity}</Text>
+      <Text style={styles.quantity}>{quantity}</Text>
 
       <View style={styles.button}>
         <AnimatedIconButton

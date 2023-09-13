@@ -70,11 +70,10 @@ const LargeCard = ({ plant }: LargeCardType) => {
   );
 
   useEffect(() => {
-    const plantAtt = cartPlants?.find((curPlant) => curPlant.id == plant.id);
+    const plantAtt = cartPlants?.find((curPlant) => curPlant.id === plant.id);
     if (plantAtt) plant.quantity = plantAtt?.quantity;
-  }, [cartPlants]);
-
-  console.log(plant);
+    else plant.quantity = 0;
+  }, [cartPlants, plant]);
 
   return (
     <PressArea

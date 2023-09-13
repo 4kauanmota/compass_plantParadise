@@ -3,20 +3,38 @@ import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
 import Plant from "../../models/Plant";
+import { useEffect, useState } from "react";
+import usePlantsStore from "../../store/Plant/PlantStore";
 
 type AddToCartType = {
   style?: StyleProp<ViewStyle>;
+  plant: Plant;
   onPress: () => void;
   text: string;
-  price: number;
 };
 
-const AddToCart = ({ style, onPress, text, price }: AddToCartType) => {
+const AddToCart = ({ style, plant, onPress, text }: AddToCartType) => {
+  const { cartPlants } = usePlantsStore();
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    if (plant) {
+      const plantAtt = cartPlants?.find((curPlant) => curPlant.id === plant.id);
+      if (plantAtt) {
+        plant.quantity = plantAtt?.quantity;
+        setPrice(plantAtt.price * plantAtt.quantity);
+      } else {
+        plant.quantity = 0;
+        setPrice(0);
+      }
+    }
+  }, [cartPlants, plant, text]);
+
   return (
     <View style={[styles.container, style, shadow.main]}>
       <View style={styles.value}>
         <Text style={styles.title}>Total price</Text>
-        <Text style={styles.price}>${price}</Text>
+        <Text style={styles.price}>${price ? price : 0}</Text>
       </View>
 
       <TextButton

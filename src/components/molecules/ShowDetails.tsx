@@ -5,7 +5,7 @@ import SubTitle from "../atoms/SubTitle";
 import { colors, fonts, shadow } from "../../theme";
 import Plant from "../../models/Plant";
 import usePlantsStore from "../../store/Plant/PlantStore";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
@@ -22,6 +22,7 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
     favoritedPlants,
     addFavoritePlant,
     removeFavoritePlant,
+
     cartPlants,
     addCartPlant,
   } = usePlantsStore();
@@ -55,6 +56,15 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
     />
   );
 
+  useEffect(() => {
+    const plantAtt = cartPlants?.find((curPlant) => curPlant.id === plant.id);
+    if (plantAtt) {
+      plant.quantity = plantAtt?.quantity;
+    } else {
+      plant.quantity = 0;
+    }
+  }, [cartPlants, plant]);
+
   const IncDecButtons = () => (
     <IncDecControl plant={plant} style={styles.incDecControl} />
   );
@@ -66,6 +76,15 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
     .includes(true) as boolean;
 
   const cartButton = !isInCart ? "Add to cart" : "Remove to cart";
+
+  const AddToCartButton = () => (
+    <AddToCart
+      style={styles.addToCart}
+      plant={plant}
+      onPress={() => addCartPlant(plant)}
+      text={cartButton}
+    />
+  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -99,40 +118,38 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
     });
   }, []);
 
-  return (
-    <>
-      <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.preview}>
-            <Image style={styles.image} source={{ uri: plant?.image }} />
-          </View>
+  const All = () => {
+    return (
+      <>
+        <ScrollView>
+          <View style={styles.container}>
+            <View style={styles.preview}>
+              <Image style={styles.image} source={{ uri: plant?.image }} />
+            </View>
 
-          <View style={styles.main}>
-            <View style={styles.buyArea}>
-              <Text style={styles.category}>{plant?.category}</Text>
-              <SubTitle style={styles.subTitle}>{plant?.title}</SubTitle>
+            <View style={styles.main}>
+              <View style={styles.buyArea}>
+                <Text style={styles.category}>{plant?.category}</Text>
+                <SubTitle style={styles.subTitle}>{plant?.title}</SubTitle>
 
-              <View style={styles.priceControl}>
-                <Text style={styles.price}>${plant?.price}</Text>
-                <IncDecButtons />
+                <View style={styles.priceControl}>
+                  <Text style={styles.price}>${plant?.price}</Text>
+                  <IncDecButtons />
+                </View>
+              </View>
+
+              <View style={styles.description}>
+                <Text style={styles.descriptionText}>{plant?.description}</Text>
               </View>
             </View>
-
-            <View style={styles.description}>
-              <Text style={styles.descriptionText}>{plant?.description}</Text>
-            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+        <AddToCartButton />
+      </>
+    );
+  };
 
-      <AddToCart
-        style={styles.addToCart}
-        onPress={() => addCartPlant(plant)}
-        text={cartButton}
-        price={plant.price * plant.quantity}
-      />
-    </>
-  );
+  return <All />;
 };
 
 const styles = StyleSheet.create({

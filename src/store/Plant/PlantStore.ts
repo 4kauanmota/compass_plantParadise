@@ -8,9 +8,10 @@ import {
 
 type UseUserStoreType = {
   favoritedPlants: Plant[] | undefined;
-  cartPlants: Plant[] | undefined;
   addFavoritePlant: (newPlant: Plant) => void;
   removeFavoritePlant: (plantId: string) => void;
+
+  cartPlants: Plant[] | undefined;
   addCartPlant: (newPlant: Plant) => void;
   increaseCartPlant: (plant: Plant) => void;
   decreaseCartPlant: (plant: Plant) => void;

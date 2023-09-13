@@ -9,6 +9,7 @@ import AnimatedIconButton from "./AnimatedIconButton";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
 import usePlantsStore from "../../store/Plant/PlantStore";
+import { useEffect } from "react";
 
 type TinyCardType = {
   plant: Plant;
@@ -57,6 +58,12 @@ const TinyCard = ({ plant }: TinyCardType) => {
     .includes(true) as boolean;
 
   const cartButton = !isInCart ? "Add to cart" : "Remove to cart";
+
+  useEffect(() => {
+    const plantAtt = cartPlants?.find((curPlant) => curPlant.id === plant.id);
+    if (plantAtt) plant.quantity = plantAtt?.quantity;
+    else plant.quantity = 0;
+  }, [cartPlants]);
 
   return (
     <PressArea
