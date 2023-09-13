@@ -13,6 +13,7 @@ import { View } from "react-native";
 import useUserStore from "../store/UserStore";
 import Profile from "../pages/User/Profile";
 import ProfileEdit from "../pages/User/ProfileEdit";
+import Plant from "../models/Plant";
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -21,7 +22,7 @@ export type RootStackParamList = {
   Tabs: undefined;
   Profile: undefined;
   ProfileEdit: undefined;
-  Details: { id: string };
+  Details: { plant: Plant };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

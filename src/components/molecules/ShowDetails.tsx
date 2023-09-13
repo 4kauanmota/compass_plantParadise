@@ -5,13 +5,12 @@ import SubTitle from "../atoms/SubTitle";
 import { colors, fonts, shadow } from "../../theme";
 import Plant from "../../models/Plant";
 import usePlantsStore from "../../store/PlantStore";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import NavBar from "./NavBar";
 import AddToCart from "./AddToCart";
-import DetailsPageBoilerPlate from "./DetailsPageBoilerplate";
 
 type ShowDetailsType = {
   plant: Plant;
@@ -33,7 +32,7 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
 
   const favoritePlantAction = () => {
     if (!favoritedPlants?.includes(plant!)) addFavoritePlant(plant!);
-    else if (plant) removeFavoritePlant(plant!.id);
+    else removeFavoritePlant(plant!.id);
   };
 
   const isFavorited = favoritedPlants

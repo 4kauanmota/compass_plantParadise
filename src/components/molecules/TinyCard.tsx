@@ -57,7 +57,7 @@ const TinyCard = ({ plant }: TinyCardType) => {
   return (
     <PressArea
       style={[{ flex: 1, borderRadius: 8 }]}
-      onPress={() => navigation.navigate("Details", { id: plant.id })}
+      onPress={() => navigation.navigate("Details", { plant: plant })}
     >
       <View style={[styles.container, shadow.main, { margin: 8 }]}>
         <View style={[styles.container]}>

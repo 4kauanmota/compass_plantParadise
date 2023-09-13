@@ -77,7 +77,7 @@ const LargeCard = ({ plant }: LargeCardType) => {
   return (
     <PressArea
       style={[{ flex: 1, borderRadius: 8 }, shadow.main]}
-      onPress={() => navigation.navigate("Details", { id: plant.id })}
+      onPress={() => navigation.navigate("Details", { plant: plant })}
     >
       <View style={[styles.container]}>
         <View style={[styles.container]}>

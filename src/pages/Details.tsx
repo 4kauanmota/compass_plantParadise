@@ -1,15 +1,13 @@
-import { StyleSheet, View, Image, Text, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 
 import AddToCart from "../components/molecules/AddToCart";
 import SubTitle from "../components/atoms/SubTitle";
 import { colors, fonts, shadow } from "../theme";
 import { useEffect, useLayoutEffect, useState } from "react";
 import Plant from "../models/Plant";
-import { fetchPlantById } from "../api/plantsApi";
 import DetailsPageBoilerPlate from "../components/molecules/DetailsPageBoilerplate";
 import NavBar from "../components/molecules/NavBar";
 import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
-import usePlantsStore from "../store/PlantStore";
 import ShowDetails from "../components/molecules/ShowDetails";
 
 const Details = ({ navigation, route }: { navigation: any; route: any }) => {
@@ -17,11 +15,8 @@ const Details = ({ navigation, route }: { navigation: any; route: any }) => {
 
   useEffect(() => {
     const loadPlant = async () => {
-      const plantId = route.params.id;
-      colors;
-      const fetchedPlant = await fetchPlantById(plantId);
       setTimeout(() => {
-        setPlant(fetchedPlant);
+        setPlant(route.params.plant);
       }, 500);
     };
 
