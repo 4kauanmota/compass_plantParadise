@@ -2,10 +2,11 @@ import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 
 import TinyCard from "../molecules/TinyCard";
 import SubTitle from "../atoms/SubTitle";
+import Plant from "../../models/Plant";
 
 type TinyCardListType = {
   children: string;
-  plants?: IPlantsCard[];
+  plants?: Plant[];
 };
 
 const TinyCardList = ({ children, plants }: TinyCardListType) => {

@@ -3,13 +3,14 @@ import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 
 import LargeCard from "../molecules/LargeCard";
 import TextOptions from "../atoms/TextOptions";
+import Plant from "../../models/Plant";
 
 type LargeCardListType = {
-  plants?: IPlantsCard[];
+  plants?: Plant[];
 };
 
 const LargeCardList = ({ plants }: LargeCardListType) => {
-  const [filterdPlants, setFilteredPlants] = useState<IPlantsCard[]>();
+  const [filterdPlants, setFilteredPlants] = useState<Plant[]>();
 
   const [filterOptions, setFilterOptions] = useState<ITextOptions[]>([
     { text: "All", selected: true },

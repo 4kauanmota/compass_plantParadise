@@ -8,14 +8,42 @@ import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
+import usePlantsStore from "../../store/PlantStore";
+import { useEffect, useState } from "react";
 
 type TinyCardType = {
-  plant: IPlantsCard;
+  plant: Plant;
 };
 
 const TinyCard = ({ plant }: TinyCardType) => {
+  const { favoritedPlants, favoritePlant, unfavoritePlant } = usePlantsStore();
+
   const navigation: NativeStackNavigationProp<RootStackParamList> =
     useNavigation();
+
+  const favoritePlantAction = () => {
+    if (!favoritedPlants?.includes(plant)) favoritePlant(plant);
+    else unfavoritePlant(plant.id);
+  };
+
+  const isLiked = favoritedPlants
+    ?.map((act) => {
+      if (act.id === plant.id) return true;
+    })
+    .includes(true) as boolean;
+
+  const FavoriteButton = () => (
+    <AnimatedIconButton
+      onPress={() => favoritePlantAction()}
+      style={styles.favoriteButton}
+      iconActive={{ icon: "heart", color: colors.primary }}
+      iconDisable={{
+        icon: "heart-outline",
+        color: colors.font.strong,
+      }}
+      initialState={isLiked}
+    />
+  );
 
   return (
     <PressArea
@@ -26,12 +54,7 @@ const TinyCard = ({ plant }: TinyCardType) => {
         <View style={[styles.container]}>
           <View style={styles.preview}>
             <Image style={styles.image} source={{ uri: plant.image }} />
-            <AnimatedIconButton
-              onPress={() => console.log("oi")}
-              style={styles.favoriteButton}
-              iconActive={{ icon: "heart", color: colors.primary }}
-              iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
-            />
+            <FavoriteButton />
           </View>
 
           <View style={styles.details}>

@@ -6,6 +6,8 @@ export default class Plant {
   private Category: string;
   private CategoryId: string;
   private Image: string;
+  private IsLiked: boolean;
+  private Quantity: number;
 
   constructor(
     Id: string,
@@ -14,7 +16,9 @@ export default class Plant {
     Price: number,
     Category: string,
     CategoryId: string,
-    Image: string
+    Image: string,
+    IsLiked: boolean = false,
+    Quantity: number = 0
   ) {
     this.Id = Id;
     this.Title = Title;
@@ -23,6 +27,8 @@ export default class Plant {
     this.Category = Category;
     this.CategoryId = CategoryId;
     this.Image = Image;
+    this.IsLiked = IsLiked;
+    this.Quantity = Quantity;
   }
 
   get id() {
@@ -51,5 +57,21 @@ export default class Plant {
 
   get image() {
     return this.Image;
+  }
+
+  get isLiked() {
+    return this.IsLiked;
+  }
+
+  set isLiked(IsLiked: boolean) {
+    this.IsLiked = IsLiked;
+  }
+
+  get quantity() {
+    return this.Quantity;
+  }
+
+  set quantity(Quantity: number) {
+    this.Quantity = Quantity;
   }
 }

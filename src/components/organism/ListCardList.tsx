@@ -4,17 +4,16 @@ import Plant from "../../models/Plant";
 import ListCard from "../molecules/ListCard";
 
 type ListCardListType = {
-  plants: Plant[];
-  action?: any;
+  plants?: Plant[];
 };
 
-const ListCardList = ({ plants, action }: ListCardListType) => {
+const ListCardList = ({ plants }: ListCardListType) => {
   return (
     <>
       <FlatList
         data={plants}
-        renderItem={({ item }) => <ListCard plant={item} action={action} />}
-        keyExtractor={(item) => item.Id}
+        renderItem={({ item }) => <ListCard plant={item} />}
+        keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         style={styles.list}
       />

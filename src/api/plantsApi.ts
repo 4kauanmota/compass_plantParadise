@@ -9,41 +9,31 @@ export async function fetchData() {
   return response;
 }
 
-export async function fetchPopularPlantsCard(): Promise<Array<IPlantsCard>> {
+export async function fetchPopularPlantsCard(): Promise<Array<Plant>> {
   const response = await axios.get(API);
   const data = response.data.body.data.mostPopular;
 
-  const plants: Array<IPlantsCard> = [];
+  const plants: Array<Plant> = [];
 
   data.map((plant: Plant) => {
-    const plantCard = {
-      id: plant.id,
-      title: plant.title,
-      price: plant.price,
-      category: plant.category,
-      image: plant.image,
-    };
-    plants.push(plantCard);
+    plant.isLiked = false;
+    plant.quantity = 0;
+    plants.push(plant);
   });
 
   return plants;
 }
 
-export async function fetchItemPlantsCard(): Promise<Array<IPlantsCard>> {
+export async function fetchItemPlantsCard(): Promise<Array<Plant>> {
   const response = await axios.get(API);
   const data = response.data.body.data.items;
 
-  const plants: Array<IPlantsCard> = [];
+  const plants: Array<Plant> = [];
 
   data.map((plant: Plant) => {
-    const plantCard = {
-      id: plant.id,
-      title: plant.title,
-      price: plant.price,
-      category: plant.category,
-      image: plant.image,
-    };
-    plants.push(plantCard);
+    plant.isLiked = false;
+    plant.quantity = 0;
+    plants.push(plant);
   });
 
   return plants;

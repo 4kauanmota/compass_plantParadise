@@ -12,21 +12,21 @@ import SubTitle from "../components/atoms/SubTitle";
 import { fetchItemPlantsCard, fetchPopularPlantsCard } from "../api/plantsApi";
 import useUserStore from "../store/UserStore";
 import AnimatedIconButton from "../components/molecules/AnimatedIconButton";
+import Plant from "../models/Plant";
 
 type HomeType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;
 };
 
 const Home = ({ navigation }: HomeType) => {
-  const [popularPlants, setPopularPlants] = useState<IPlantsCard[]>();
-  const [itemPlants, setItemPlants] = useState<IPlantsCard[]>();
+  const [popularPlants, setPopularPlants] = useState<Plant[]>();
+  const [itemPlants, setItemPlants] = useState<Plant[]>();
   const { currentUser } = useUserStore();
 
   useEffect(() => {
     const loadPlants = async () => {
-      const fetchedPopularPlants: IPlantsCard[] =
-        await fetchPopularPlantsCard();
-      const fetchedItemPlants: IPlantsCard[] = await fetchItemPlantsCard();
+      const fetchedPopularPlants: Plant[] = await fetchPopularPlantsCard();
+      const fetchedItemPlants: Plant[] = await fetchItemPlantsCard();
 
       setPopularPlants(fetchedPopularPlants);
       setItemPlants(fetchedItemPlants);

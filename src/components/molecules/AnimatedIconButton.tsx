@@ -20,6 +20,7 @@ type FavoriteButtonType = {
   iconActive: any;
   iconDisable: any;
   shadowOn?: boolean;
+  initialState?: boolean;
 };
 
 const AnimatedIconButton = ({
@@ -30,8 +31,9 @@ const AnimatedIconButton = ({
   iconActive,
   iconDisable,
   shadowOn = true,
+  initialState = false,
 }: FavoriteButtonType) => {
-  const state = useSharedValue(0);
+  const state = useSharedValue(initialState ? 1 : 0);
 
   const outlineStyle = useAnimatedStyle(() => {
     return {
@@ -57,7 +59,8 @@ const AnimatedIconButton = ({
   return (
     <PressArea
       onPress={() => {
-        onPress();
+        setTimeout(() => onPress(), 1);
+
         return (state.value = withSpring(state.value ? 0 : 1));
       }}
       style={[styles.button, style, shadowOn ? shadow.main : null]}
