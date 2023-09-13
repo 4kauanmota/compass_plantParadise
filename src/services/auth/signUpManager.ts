@@ -47,6 +47,7 @@ const signUpManager = async (
       type: "failed",
       text1: "This email isn't avaible",
     });
+    console.log(err);
   }
 };
 

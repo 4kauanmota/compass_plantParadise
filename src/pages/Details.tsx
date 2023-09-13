@@ -1,5 +1,4 @@
 import { StyleSheet, View, Image, Text, ScrollView } from "react-native";
-import ContentLoader from "react-native-easy-content-loader";
 
 import AddToCart from "../components/molecules/AddToCart";
 import IncDecControl from "../components/molecules/IncDecControl";
@@ -8,6 +7,7 @@ import { colors, fonts } from "../theme";
 import { useEffect, useState } from "react";
 import Plant from "../models/Plant";
 import { fetchPlantById } from "../api/plantsApi";
+import DetailsPageBoilerPlate from "../components/molecules/DetailsPageBoilerplate";
 
 const Details = ({ route }: { route: any }) => {
   const [plant, setPlant] = useState<Plant>();
@@ -26,10 +26,10 @@ const Details = ({ route }: { route: any }) => {
 
   return (
     <>
-      <ScrollView>
-        <View style={styles.container}>
-          {plant ? (
-            <>
+      {plant ? (
+        <>
+          <ScrollView>
+            <View style={styles.container}>
               <View style={styles.preview}>
                 <Image style={styles.image} source={{ uri: plant?.image }} />
               </View>
@@ -51,20 +51,12 @@ const Details = ({ route }: { route: any }) => {
                   </Text>
                 </View>
               </View>
-            </>
-          ) : (
-            <ContentLoader
-              active={true}
-              tHeight={0}
-              tWidth={0}
-              pRows={30}
-              pWidth={["100%", 72, 231, "100%"]}
-              pHeight={[247, 24, 24, 19]}
-            />
-          )}
-        </View>
-      </ScrollView>
-
+            </View>
+          </ScrollView>
+        </>
+      ) : (
+        <DetailsPageBoilerPlate />
+      )}
       <AddToCart style={styles.addToCart} />
     </>
   );

@@ -44,6 +44,7 @@ const signInManager = async (
       type: "failed",
       text1: "Authentication failed",
     });
+    console.log(err);
   }
 };
 

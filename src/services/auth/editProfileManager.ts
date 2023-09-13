@@ -46,6 +46,10 @@ const editProfileManager = async (
       text1: "Update sucessful",
     });
   } catch (err) {
+    Toast.show({
+      type: "failed",
+      text1: "Incorrect password",
+    });
     console.log(err);
   }
 };

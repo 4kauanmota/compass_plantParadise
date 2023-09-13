@@ -12,6 +12,7 @@ import nameValidator from "../../services/validator/nameValidator";
 import passwordConfirmationValidator from "../../services/validator/passwordConfirmationValidator";
 import ProfileForm from "../../components/organism/ProfileForm";
 import editProfileManager from "../../services/auth/editProfileManager";
+import imageValidator from "../../services/validator/imageValidator";
 
 type ProfileEditType = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
@@ -40,12 +41,15 @@ const ProfileEdit = ({ navigation }: ProfileEditType) => {
     userErrors.image.errors = new Array<string>();
     userErrors.password.errors = new Array<string>();
 
-    //wadwawafaidjsaiodjwaoijwaoid
     nameValidator(userErrors.name);
+    imageValidator(userErrors.image);
     passwordValidator(userErrors.password);
 
     setUser(userErrors);
-    if (user!.password.errors?.length === 0) {
+    if (
+      user!.password.errors?.length === 0 &&
+      user!.image.errors?.length === 0
+    ) {
       editProfileManager(
         user,
         navigation,
