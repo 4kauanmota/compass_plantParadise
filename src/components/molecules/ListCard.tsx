@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Plant from "../../models/Plant";
 import { colors, fonts, shadow } from "../../theme";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 import AnimatedIconButton from "./AnimatedIconButton";
 import IncDecControl from "./IncDecControl";
 import PressArea from "../atoms/PressArea";
@@ -55,7 +55,7 @@ const ListCard = ({ plant, action }: ListCardType) => {
                   initialState={true}
                 />
               ) : (
-                <IncDecControl />
+                <IncDecControl plant={plant} />
               )}
             </View>
           </View>

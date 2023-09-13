@@ -4,7 +4,7 @@ import IncDecControl from "./IncDecControl";
 import SubTitle from "../atoms/SubTitle";
 import { colors, fonts, shadow } from "../../theme";
 import Plant from "../../models/Plant";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 import { useLayoutEffect } from "react";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

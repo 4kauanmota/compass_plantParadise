@@ -8,7 +8,7 @@ import SubTitle from "../../components/atoms/SubTitle";
 import VirtualizedList from "../../components/atoms/VirtualizedList";
 import ListCardList from "../../components/organism/ListCardList";
 import { colors } from "../../theme";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 
 type FavoritesType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;

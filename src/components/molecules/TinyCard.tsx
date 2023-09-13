@@ -8,7 +8,7 @@ import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 
 type TinyCardType = {
   plant: Plant;
@@ -31,10 +31,6 @@ const TinyCard = ({ plant }: TinyCardType) => {
     else removeFavoritePlant(plant.id);
   };
 
-  const cartPlantAction = () => {
-    if (!cartPlants?.includes(plant)) addCartPlant(plant);
-  };
-
   const isLiked = favoritedPlants
     ?.map((act) => {
       if (act.id === plant.id) return true;
@@ -53,6 +49,14 @@ const TinyCard = ({ plant }: TinyCardType) => {
       initialState={isLiked}
     />
   );
+
+  const isInCart = cartPlants
+    ?.map((act) => {
+      if (act.id === plant.id) return true;
+    })
+    .includes(true) as boolean;
+
+  const cartButton = !isInCart ? "Add to cart" : "Remove to cart";
 
   return (
     <PressArea
@@ -75,9 +79,9 @@ const TinyCard = ({ plant }: TinyCardType) => {
             <View style={styles.action}>
               <TextButton
                 textStyle={{ fontSize: 12 }}
-                onPress={() => cartPlantAction()}
+                onPress={() => addCartPlant(plant)}
               >
-                Add to cart
+                {cartButton}
               </TextButton>
             </View>
           </View>

@@ -9,7 +9,7 @@ import VirtualizedList from "../../components/atoms/VirtualizedList";
 import ListCardList from "../../components/organism/ListCardList";
 import { colors } from "../../theme";
 import GoToCheckout from "../../components/molecules/GoToCheckout";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 
 type CartType = {
   navigation: NativeStackNavigationProp<RootStackParamList, "Tabs">;

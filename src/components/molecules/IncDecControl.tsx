@@ -3,28 +3,23 @@ import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 
 import AnimatedIconButton from "./AnimatedIconButton";
 import { colors, fonts } from "../../theme";
+import Plant from "../../models/Plant";
+import usePlantsStore from "../../store/Plant/PlantStore";
 
 type IncDecControlType = {
   style?: StyleProp<ViewStyle>;
+  plant: Plant;
 };
 
-const IncDecControl = ({ style }: IncDecControlType) => {
-  const [quantity, setQuantity] = useState(1);
-
-  const decreaseButton = () => {
-    if (quantity > 1) setQuantity((act) => --act);
-  };
-
-  const increaseButton = () => {
-    setQuantity((act) => ++act);
-  };
+const IncDecControl = ({ style, plant }: IncDecControlType) => {
+  const { increaseCartPlant, decreaseCartPlant } = usePlantsStore();
 
   return (
     <View style={[styles.container, style]}>
       <View style={styles.button}>
-        {quantity > 1 ? (
+        {plant.quantity > 1 ? (
           <AnimatedIconButton
-            onPress={decreaseButton}
+            onPress={() => decreaseCartPlant(plant)}
             style={styles.decreaseButton}
             iconLib="ionicons"
             iconSize={20}
@@ -33,7 +28,7 @@ const IncDecControl = ({ style }: IncDecControlType) => {
           />
         ) : (
           <AnimatedIconButton
-            onPress={decreaseButton}
+            onPress={() => decreaseCartPlant(plant)}
             style={styles.deleteButton}
             iconSize={20}
             iconActive={{ icon: "delete-outline", color: colors.error }}
@@ -42,11 +37,11 @@ const IncDecControl = ({ style }: IncDecControlType) => {
         )}
       </View>
 
-      <Text style={styles.quantity}>{quantity}</Text>
+      <Text style={styles.quantity}>{plant.quantity}</Text>
 
       <View style={styles.button}>
         <AnimatedIconButton
-          onPress={increaseButton}
+          onPress={() => increaseCartPlant(plant)}
           style={styles.increaseButton}
           iconSize={20}
           iconActive={{ icon: "plus", color: colors.background }}

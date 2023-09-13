@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import Plant from "../models/Plant";
+import Plant from "../../models/Plant";
+import {
+  addCartPlantHandler,
+  decreaseCartPlantHandler,
+  increaseCartPlantHandler,
+} from "./PlantHandler";
 
 type UseUserStoreType = {
   favoritedPlants: Plant[] | undefined;
@@ -7,6 +12,8 @@ type UseUserStoreType = {
   addFavoritePlant: (newPlant: Plant) => void;
   removeFavoritePlant: (plantId: string) => void;
   addCartPlant: (newPlant: Plant) => void;
+  increaseCartPlant: (plant: Plant) => void;
+  decreaseCartPlant: (plant: Plant) => void;
   removeCartPlant: (plantId: string) => void;
 };
 
@@ -31,7 +38,19 @@ const usePlantsStore = create<UseUserStoreType>((set) => ({
 
   addCartPlant: (newPlant: Plant) => {
     set((state) => ({
-      cartPlants: [...state.cartPlants!, newPlant],
+      cartPlants: [...addCartPlantHandler(state, newPlant)],
+    }));
+  },
+
+  increaseCartPlant: (plant: Plant) => {
+    set((state) => ({
+      cartPlants: [...increaseCartPlantHandler(state, plant)],
+    }));
+  },
+
+  decreaseCartPlant: (plant: Plant) => {
+    set((state) => ({
+      cartPlants: [...decreaseCartPlantHandler(state, plant)],
     }));
   },
 

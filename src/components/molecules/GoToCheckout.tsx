@@ -9,13 +9,16 @@ type GoToCheckoutType = {
 };
 
 const GoToCheckout = ({ plants }: GoToCheckoutType) => {
-  const priceCalc = plants?.reduce((acc, cur) => acc + cur.price, 0);
+  const priceCalc = plants?.reduce(
+    (acc, cur) => acc + cur.price * cur.quantity,
+    0
+  );
 
   return (
     <View style={styles.container}>
       <View style={styles.value}>
         <Text style={styles.title}>Subtotal:</Text>
-        <Text style={styles.price}>${priceCalc}</Text>
+        <Text style={styles.price}>${priceCalc?.toFixed(2) ?? ""}</Text>
       </View>
 
       <TextButton

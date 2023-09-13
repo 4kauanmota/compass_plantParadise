@@ -6,7 +6,7 @@ import { colors, fonts, shadow } from "../../theme";
 import AnimatedIconButton from "./AnimatedIconButton";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
-import usePlantsStore from "../../store/PlantStore";
+import usePlantsStore from "../../store/Plant/PlantStore";
 import Plant from "../../models/Plant";
 
 type LargeCardType = {
@@ -50,11 +50,6 @@ const LargeCard = ({ plant }: LargeCardType) => {
     />
   );
 
-  const cartPlantAction = () => {
-    if (!cartPlants?.includes(plant)) addCartPlant(plant);
-    else removeCartPlant(plant.id);
-  };
-
   const isInCart = cartPlants
     ?.map((act) => {
       if (act.id === plant.id) return true;
@@ -63,7 +58,7 @@ const LargeCard = ({ plant }: LargeCardType) => {
 
   const CartButton = () => (
     <AnimatedIconButton
-      onPress={() => cartPlantAction()}
+      onPress={() => addCartPlant(plant)}
       style={styles.buyButton}
       iconActive={{ icon: "shopping", color: colors.background }}
       iconDisable={{
