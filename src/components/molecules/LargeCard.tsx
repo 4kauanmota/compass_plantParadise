@@ -8,6 +8,7 @@ import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
 import usePlantsStore from "../../store/Plant/PlantStore";
 import Plant from "../../models/Plant";
+import { useEffect } from "react";
 
 type LargeCardType = {
   plant: Plant;
@@ -19,7 +20,6 @@ const LargeCard = ({ plant }: LargeCardType) => {
     addFavoritePlant,
     removeFavoritePlant,
     cartPlants,
-    removeCartPlant,
     addCartPlant,
   } = usePlantsStore();
 
@@ -68,6 +68,13 @@ const LargeCard = ({ plant }: LargeCardType) => {
       initialState={isInCart}
     />
   );
+
+  useEffect(() => {
+    const plantAtt = cartPlants?.find((curPlant) => curPlant.id == plant.id);
+    if (plantAtt) plant.quantity = plantAtt?.quantity;
+  }, [cartPlants]);
+
+  console.log(plant);
 
   return (
     <PressArea

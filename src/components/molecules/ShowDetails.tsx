@@ -26,10 +26,6 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
     addCartPlant,
   } = usePlantsStore();
 
-  const cartPlantAction = () => {
-    if (!cartPlants?.includes(plant!)) addCartPlant(plant!);
-  };
-
   const favoritePlantAction = () => {
     if (!favoritedPlants?.includes(plant!)) addFavoritePlant(plant!);
     else removeFavoritePlant(plant!.id);
@@ -58,6 +54,18 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
       initialState={isFavorited}
     />
   );
+
+  const IncDecButtons = () => (
+    <IncDecControl plant={plant} style={styles.incDecControl} />
+  );
+
+  const isInCart = cartPlants
+    ?.map((act) => {
+      if (act.id === plant.id) return true;
+    })
+    .includes(true) as boolean;
+
+  const cartButton = !isInCart ? "Add to cart" : "Remove to cart";
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -106,7 +114,7 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
 
               <View style={styles.priceControl}>
                 <Text style={styles.price}>${plant?.price}</Text>
-                <IncDecControl style={styles.incDecControl} />
+                <IncDecButtons />
               </View>
             </View>
 
@@ -116,7 +124,13 @@ const ShowDetails = ({ plant, navigation }: ShowDetailsType) => {
           </View>
         </View>
       </ScrollView>
-      <AddToCart style={styles.addToCart} onPress={() => cartPlantAction()} />
+
+      <AddToCart
+        style={styles.addToCart}
+        onPress={() => addCartPlant(plant)}
+        text={cartButton}
+        price={plant.price * plant.quantity}
+      />
     </>
   );
 };

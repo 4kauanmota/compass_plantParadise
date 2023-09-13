@@ -2,18 +2,21 @@ import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
 
 import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
+import Plant from "../../models/Plant";
 
 type AddToCartType = {
   style?: StyleProp<ViewStyle>;
   onPress: () => void;
+  text: string;
+  price: number;
 };
 
-const AddToCart = ({ style, onPress }: AddToCartType) => {
+const AddToCart = ({ style, onPress, text, price }: AddToCartType) => {
   return (
     <View style={[styles.container, style, shadow.main]}>
       <View style={styles.value}>
         <Text style={styles.title}>Total price</Text>
-        <Text style={styles.price}>$18.40</Text>
+        <Text style={styles.price}>${price}</Text>
       </View>
 
       <TextButton
@@ -21,7 +24,7 @@ const AddToCart = ({ style, onPress }: AddToCartType) => {
         textStyle={styles.buyText}
         onPress={onPress}
       >
-        Add to cart
+        {text}
       </TextButton>
     </View>
   );

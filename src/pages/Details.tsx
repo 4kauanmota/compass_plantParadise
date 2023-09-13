@@ -78,7 +78,12 @@ const Details = ({ navigation, route }: { navigation: any; route: any }) => {
       ) : (
         <>
           <DetailsPageBoilerPlate />
-          <AddToCart style={styles.addToCart} onPress={() => null} />
+          <AddToCart
+            text="Add to cart"
+            price={0}
+            style={styles.addToCart}
+            onPress={() => null}
+          />
         </>
       )}
     </>
