@@ -1,7 +1,7 @@
 ![Project Stars](https://img.shields.io/github/stars/4kauanmota/compass_plantParadise?color=1e90ff) ![Project Commits Week](https://img.shields.io/github/commit-activity/w/compass_plantParadise/NAME?color=1e90ff)
 
 # 📄 **Informations**
-**This project was made by me for a [Compass UOL](https://compass.uol/en/home/) challenge, the topic is about create a navegation project.**
+**This project was made by me for a [Compass UOL](https://compass.uol/en/home/) challenge, the topic is about create a plant store project.**
 
 ---
 
@@ -16,7 +16,9 @@
   + Username
   + Image
   + Purchases
-+ Api fetch 
++ Api fetch
++ FeedBack pop-ups
++ Animated icons
 
 
 ---
