@@ -43,7 +43,10 @@ const signUpManager = async (
       text1: "Sign up sucessful",
     });
   } catch (err) {
-    console.log(err);
+    Toast.show({
+      type: "failed",
+      text1: "This email isn't avaible",
+    });
   }
 };
 

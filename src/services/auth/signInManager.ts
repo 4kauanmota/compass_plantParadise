@@ -40,7 +40,10 @@ const signInManager = async (
       text1: "Sign in sucessful",
     });
   } catch (err) {
-    console.log(err);
+    Toast.show({
+      type: "failed",
+      text1: "Authentication failed",
+    });
   }
 };
 
