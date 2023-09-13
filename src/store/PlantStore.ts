@@ -3,23 +3,42 @@ import Plant from "../models/Plant";
 
 type UseUserStoreType = {
   favoritedPlants: Plant[] | undefined;
-  favoritePlant: (newPlant: Plant) => void;
-  unfavoritePlant: (plantId: string) => void;
+  cartPlants: Plant[] | undefined;
+  addFavoritePlant: (newPlant: Plant) => void;
+  removeFavoritePlant: (plantId: string) => void;
+  addCartPlant: (newPlant: Plant) => void;
+  removeCartPlant: (plantId: string) => void;
 };
 
 const usePlantsStore = create<UseUserStoreType>((set) => ({
   favoritedPlants: [],
 
-  favoritePlant: (newPlant: Plant) => {
+  cartPlants: [],
+
+  addFavoritePlant: (newPlant: Plant) => {
     set((state) => ({
       favoritedPlants: [...state.favoritedPlants!, newPlant],
     }));
   },
 
-  unfavoritePlant: (plantId: string) => {
+  removeFavoritePlant: (plantId: string) => {
     set((state) => ({
       favoritedPlants: [
         ...state.favoritedPlants!.filter((plant) => plant.id !== plantId),
+      ],
+    }));
+  },
+
+  addCartPlant: (newPlant: Plant) => {
+    set((state) => ({
+      cartPlants: [...state.cartPlants!, newPlant],
+    }));
+  },
+
+  removeCartPlant: (plantId: string) => {
+    set((state) => ({
+      cartPlants: [
+        ...state.cartPlants!.filter((plant) => plant.id !== plantId),
       ],
     }));
   },

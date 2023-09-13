@@ -4,16 +4,18 @@ import Plant from "../../models/Plant";
 import { colors, fonts, shadow } from "../../theme";
 import usePlantsStore from "../../store/PlantStore";
 import AnimatedIconButton from "./AnimatedIconButton";
+import IncDecControl from "./IncDecControl";
 
 type ListCardType = {
   plant: Plant;
+  action?: string;
 };
 
-const ListCard = ({ plant }: ListCardType) => {
-  const { unfavoritePlant } = usePlantsStore();
+const ListCard = ({ plant, action }: ListCardType) => {
+  const { removeFavoritePlant } = usePlantsStore();
 
   const favoritePlantAction = () => {
-    unfavoritePlant(plant.id);
+    removeFavoritePlant(plant.id);
   };
 
   return (
@@ -30,14 +32,21 @@ const ListCard = ({ plant }: ListCardType) => {
           </View>
 
           <View style={styles.action}>
-            <AnimatedIconButton
-              onPress={() => favoritePlantAction()}
-              style={styles.favoriteButton}
-              iconSize={20}
-              iconActive={{ icon: "heart", color: colors.primary }}
-              iconDisable={{ icon: "heart-outline", color: colors.font.strong }}
-              initialState={true}
-            />
+            {action === "favoriteButton" ? (
+              <AnimatedIconButton
+                onPress={() => favoritePlantAction()}
+                style={styles.favoriteButton}
+                iconSize={20}
+                iconActive={{ icon: "heart", color: colors.primary }}
+                iconDisable={{
+                  icon: "heart-outline",
+                  color: colors.font.strong,
+                }}
+                initialState={true}
+              />
+            ) : (
+              <IncDecControl />
+            )}
           </View>
         </View>
       </View>
@@ -80,7 +89,7 @@ const styles = StyleSheet.create({
   ////////
 
   description: {
-    flex: 14,
+    flex: 5,
   },
 
   name: {

@@ -25,7 +25,7 @@ const Favorites = ({ navigation }: FavoritesType) => {
 
   return (
     <VirtualizedList style={styles.container}>
-      <ListCardList plants={favoritedPlants} />
+      <ListCardList plants={favoritedPlants} action={"favoriteButton"} />
     </VirtualizedList>
   );
 };

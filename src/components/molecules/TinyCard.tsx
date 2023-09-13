@@ -9,21 +9,30 @@ import AnimatedIconButton from "./AnimatedIconButton";
 import { RootStackParamList } from "../../navigators/StackNavigation";
 import PressArea from "../atoms/PressArea";
 import usePlantsStore from "../../store/PlantStore";
-import { useEffect, useState } from "react";
 
 type TinyCardType = {
   plant: Plant;
 };
 
 const TinyCard = ({ plant }: TinyCardType) => {
-  const { favoritedPlants, favoritePlant, unfavoritePlant } = usePlantsStore();
+  const {
+    favoritedPlants,
+    addFavoritePlant,
+    removeFavoritePlant,
+    cartPlants,
+    addCartPlant,
+  } = usePlantsStore();
 
   const navigation: NativeStackNavigationProp<RootStackParamList> =
     useNavigation();
 
   const favoritePlantAction = () => {
-    if (!favoritedPlants?.includes(plant)) favoritePlant(plant);
-    else unfavoritePlant(plant.id);
+    if (!favoritedPlants?.includes(plant)) addFavoritePlant(plant);
+    else removeFavoritePlant(plant.id);
+  };
+
+  const cartPlantAction = () => {
+    if (!cartPlants?.includes(plant)) addCartPlant(plant);
   };
 
   const isLiked = favoritedPlants
@@ -66,7 +75,7 @@ const TinyCard = ({ plant }: TinyCardType) => {
             <View style={styles.action}>
               <TextButton
                 textStyle={{ fontSize: 12 }}
-                onPress={() => console.log("hello world")}
+                onPress={() => cartPlantAction()}
               >
                 Add to cart
               </TextButton>

@@ -2,13 +2,20 @@ import { View, Text, StyleSheet } from "react-native";
 
 import TextButton from "./TextButton";
 import { colors, fonts } from "../../theme";
+import Plant from "../../models/Plant";
 
-const BuyArea = () => {
+type GoToCheckoutType = {
+  plants?: Plant[];
+};
+
+const GoToCheckout = ({ plants }: GoToCheckoutType) => {
+  const priceCalc = plants?.reduce((acc, cur) => acc + cur.price, 0);
+
   return (
     <View style={styles.container}>
       <View style={styles.value}>
         <Text style={styles.title}>Subtotal:</Text>
-        <Text style={styles.price}>$30.8</Text>
+        <Text style={styles.price}>${priceCalc}</Text>
       </View>
 
       <TextButton
@@ -71,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuyArea;
+export default GoToCheckout;

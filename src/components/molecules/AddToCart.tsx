@@ -4,10 +4,11 @@ import TextButton from "./TextButton";
 import { colors, fonts, shadow } from "../../theme";
 
 type AddToCartType = {
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
+  onPress: () => void;
 };
 
-const AddToCart = ({ style }: AddToCartType) => {
+const AddToCart = ({ style, onPress }: AddToCartType) => {
   return (
     <View style={[styles.container, style, shadow.main]}>
       <View style={styles.value}>
@@ -18,7 +19,7 @@ const AddToCart = ({ style }: AddToCartType) => {
       <TextButton
         style={styles.buyButton}
         textStyle={styles.buyText}
-        onPress={() => null}
+        onPress={onPress}
       >
         Add to cart
       </TextButton>

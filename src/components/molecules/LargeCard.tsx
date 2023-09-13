@@ -14,14 +14,21 @@ type LargeCardType = {
 };
 
 const LargeCard = ({ plant }: LargeCardType) => {
-  const { favoritedPlants, favoritePlant, unfavoritePlant } = usePlantsStore();
+  const {
+    favoritedPlants,
+    addFavoritePlant,
+    removeFavoritePlant,
+    cartPlants,
+    removeCartPlant,
+    addCartPlant,
+  } = usePlantsStore();
 
   const navigation: NativeStackNavigationProp<RootStackParamList> =
     useNavigation();
 
   const favoritePlantAction = () => {
-    if (!favoritedPlants?.includes(plant)) favoritePlant(plant);
-    else unfavoritePlant(plant.id);
+    if (!favoritedPlants?.includes(plant)) addFavoritePlant(plant);
+    else removeFavoritePlant(plant.id);
   };
 
   const isLiked = favoritedPlants
@@ -40,6 +47,30 @@ const LargeCard = ({ plant }: LargeCardType) => {
         color: colors.font.strong,
       }}
       initialState={isLiked}
+    />
+  );
+
+  const cartPlantAction = () => {
+    if (!cartPlants?.includes(plant)) addCartPlant(plant);
+    else removeCartPlant(plant.id);
+  };
+
+  const isInCart = cartPlants
+    ?.map((act) => {
+      if (act.id === plant.id) return true;
+    })
+    .includes(true) as boolean;
+
+  const CartButton = () => (
+    <AnimatedIconButton
+      onPress={() => cartPlantAction()}
+      style={styles.buyButton}
+      iconActive={{ icon: "shopping", color: colors.background }}
+      iconDisable={{
+        icon: "shopping-outline",
+        color: colors.background,
+      }}
+      initialState={isInCart}
     />
   );
 
@@ -63,15 +94,7 @@ const LargeCard = ({ plant }: LargeCardType) => {
             </View>
 
             <View style={styles.action}>
-              <AnimatedIconButton
-                onPress={() => null}
-                style={styles.buyButton}
-                iconActive={{ icon: "shopping", color: colors.background }}
-                iconDisable={{
-                  icon: "shopping-outline",
-                  color: colors.background,
-                }}
-              />
+              <CartButton />
             </View>
           </View>
         </View>

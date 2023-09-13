@@ -113,56 +113,7 @@ const StackNavigation = () => {
             }}
           />
 
-          <Stack.Screen
-            name="Details"
-            component={Details}
-            options={{
-              header: ({ navigation }) => (
-                <NavBar
-                  style={shadow.main}
-                  left={
-                    <AnimatedIconButton
-                      onPress={() => navigation.goBack()}
-                      iconSize={26}
-                      iconActive={{
-                        icon: "chevron-left",
-                        color: colors.font.strong,
-                      }}
-                      iconDisable={{
-                        icon: "chevron-left",
-                        color: colors.font.strong,
-                      }}
-                      style={{ transform: [{ translateY: -4 }] }}
-                      shadowOn={false}
-                    />
-                  }
-                  center={
-                    <SubTitle
-                      textStyle={{ fontFamily: fonts.main[600], fontSize: 14 }}
-                    >
-                      Details
-                    </SubTitle>
-                  }
-                  right={
-                    <AnimatedIconButton
-                      onPress={() => null}
-                      iconSize={26}
-                      iconActive={{
-                        icon: "heart",
-                        color: colors.primary,
-                      }}
-                      iconDisable={{
-                        icon: "heart-outline",
-                        color: colors.font.strong,
-                      }}
-                      style={{ transform: [{ translateY: -4 }] }}
-                      shadowOn={false}
-                    />
-                  }
-                />
-              ),
-            }}
-          />
+          <Stack.Screen name="Details" component={Details} />
         </>
       ) : (
         <>
