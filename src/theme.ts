@@ -42,6 +42,20 @@ export const shadow = StyleSheet.create({
       },
     }),
   },
+
+  secondary: {
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.font.strong,
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
 });
 
 export const pressEffect = {

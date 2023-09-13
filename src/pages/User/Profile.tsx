@@ -1,4 +1,4 @@
-import { Image, View, Text, StyleSheet } from "react-native";
+import { Image, View, Text, StyleSheet, FlatList } from "react-native";
 import VirtualizedList from "../../components/atoms/VirtualizedList";
 import useUserStore from "../../store/UserStore";
 import SubTitle from "../../components/atoms/SubTitle";
@@ -6,20 +6,22 @@ import TextButton from "../../components/molecules/TextButton";
 import { colors, fonts } from "../../theme";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigators/StackNavigation";
+import Purchases from "../../components/organism/PurchaseCardList";
+import PurchaseCardList from "../../components/organism/PurchaseCardList";
 
 type ProfileType = {
   navigation: NativeStackNavigationProp<RootStackParamList>;
 };
 
 const Profile = ({ navigation }: ProfileType) => {
-  const { currentUser, removeCurrentUser } = useUserStore();
+  const { currentUser, removeCurrentUser, purchases } = useUserStore();
 
   const image = currentUser?.image
     ? { uri: currentUser?.image }
     : require("../../../assets/img/userImageBoilerplate.png");
 
   return (
-    <VirtualizedList style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.information}>
         <View style={styles.userArea}>
           <Image style={styles.image} source={image} />
@@ -45,7 +47,16 @@ const Profile = ({ navigation }: ProfileType) => {
           </TextButton>
         </View>
       </View>
-    </VirtualizedList>
+
+      <FlatList
+        data={purchases}
+        renderItem={({ item }) => <PurchaseCardList purchases={item} />}
+        keyExtractor={() => Math.random().toString()}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={<></>}
+        style={styles.list}
+      />
+    </View>
   );
 };
 
@@ -104,6 +115,12 @@ const styles = StyleSheet.create({
 
   actionButtonsText: {
     fontSize: 20,
+  },
+
+  ////////
+
+  list: {
+    flex: 1,
   },
 });
 

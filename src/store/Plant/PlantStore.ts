@@ -16,12 +16,11 @@ type UseUserStoreType = {
   increaseCartPlant: (plant: Plant) => void;
   decreaseCartPlant: (plant: Plant) => void;
   removeCartPlant: (plantId: string) => void;
+  cleanCart: () => void;
 };
 
 const usePlantsStore = create<UseUserStoreType>((set) => ({
   favoritedPlants: [],
-
-  cartPlants: [],
 
   addFavoritePlant: (newPlant: Plant) => {
     set((state) => ({
@@ -36,6 +35,8 @@ const usePlantsStore = create<UseUserStoreType>((set) => ({
       ],
     }));
   },
+
+  cartPlants: [],
 
   addCartPlant: (newPlant: Plant) => {
     set((state) => ({
@@ -60,6 +61,12 @@ const usePlantsStore = create<UseUserStoreType>((set) => ({
       cartPlants: [
         ...state.cartPlants!.filter((plant) => plant.id !== plantId),
       ],
+    }));
+  },
+
+  cleanCart: () => {
+    set(() => ({
+      cartPlants: [],
     }));
   },
 }));

@@ -3,16 +3,34 @@ import { View, Text, StyleSheet } from "react-native";
 import TextButton from "./TextButton";
 import { colors, fonts } from "../../theme";
 import Plant from "../../models/Plant";
+import usePlantsStore from "../../store/Plant/PlantStore";
+import useUserStore from "../../store/UserStore";
+import Toast from "react-native-toast-message";
 
 type GoToCheckoutType = {
   plants?: Plant[];
 };
 
 const GoToCheckout = ({ plants }: GoToCheckoutType) => {
+  const { addPurchases } = useUserStore();
+  const { cartPlants, cleanCart } = usePlantsStore();
+
   const priceCalc = plants?.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
     0
   );
+
+  const GoToCheckoutHandler = () => {
+    Toast.show({
+      type: "auth",
+      text1: "Successful purchase",
+    });
+
+    if (priceCalc !== 0) {
+      addPurchases([...cartPlants!]);
+      cleanCart();
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -24,7 +42,7 @@ const GoToCheckout = ({ plants }: GoToCheckoutType) => {
       <TextButton
         style={styles.buyButton}
         textStyle={styles.buyText}
-        onPress={() => null}
+        onPress={() => GoToCheckoutHandler()}
       >
         Go to checkout
       </TextButton>

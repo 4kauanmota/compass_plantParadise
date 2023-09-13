@@ -1,5 +1,4 @@
 import { View, Text, Image } from "react-native";
-import { BaseToast, ErrorToast } from "react-native-toast-message";
 import { colors, fonts } from "../theme";
 
 const toastConfig = {
@@ -7,7 +6,7 @@ const toastConfig = {
     <View
       style={{
         height: 60,
-        width: "60%",
+        width: "70%",
         backgroundColor: colors.secondary,
         borderRadius: 16,
         flexDirection: "row",

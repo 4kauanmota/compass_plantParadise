@@ -34,7 +34,7 @@ const StackNavigation = () => {
     <Stack.Navigator
       screenOptions={{ contentStyle: { backgroundColor: colors.background } }}
     >
-      {true ? (
+      {currentUser ? (
         <>
           <Stack.Screen
             name="Tabs"

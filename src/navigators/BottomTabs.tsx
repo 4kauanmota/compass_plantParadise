@@ -5,6 +5,8 @@ import Cart from "../pages/User/Cart";
 import Favorites from "../pages/User/Favorites";
 import { colors } from "../theme";
 import TabBarItem from "../components/atoms/TabBarItem";
+import usePlantsStore from "../store/Plant/PlantStore";
+import { View } from "react-native";
 
 export type RootTabParamList = {
   Home: undefined;
@@ -15,6 +17,42 @@ export type RootTabParamList = {
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const BottomTabs = () => {
+  const { cartPlants } = usePlantsStore();
+
+  const CartIcon = (color: any) => {
+    if (cartPlants && cartPlants?.length === 0) {
+      return (
+        <TabBarItem
+          icon="shopping-outline"
+          color={color.color}
+          size={30}
+          title="Cart"
+        />
+      );
+    }
+    return (
+      <View>
+        <TabBarItem
+          icon="shopping-outline"
+          color={color.color}
+          size={30}
+          title="Cart"
+        />
+        <View
+          style={{
+            backgroundColor: "#FF9900BA",
+            width: 10,
+            height: 10,
+            borderRadius: 5,
+            position: "absolute",
+            top: 0,
+            right: 6,
+          }}
+        ></View>
+      </View>
+    );
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -58,14 +96,7 @@ const BottomTabs = () => {
         name="Cart"
         component={Cart}
         options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarItem
-              icon="shopping-outline"
-              color={color}
-              size={30}
-              title="Cart"
-            />
-          ),
+          tabBarIcon: ({ color }) => <CartIcon color={color} />,
         }}
       />
     </Tab.Navigator>
