@@ -75,7 +75,7 @@ Then you can open the project using [EXPO GO](https://expo.dev/client) app to re
 
 # 👀 **Preview**
 ### Mobile
-You can see all project screens by clicking [HERE](https://imgur.com/a/krAyGAr) 
+You can see all project screens by clicking [HERE](https://imgur.com/a/krAyGAr) <br><br>
 _PS: I uploaded all the videos to imgur because there were too many for me to put as a gif here_
 
 ---
