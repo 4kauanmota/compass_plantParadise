@@ -19,7 +19,7 @@ const Auth = ({ navigation }: AuthType) => {
       <View style={styles.header}>
         <Image
           style={styles.image}
-          source={require("../../../assets/img/homeBackground.png")}
+          source={require("../../../assets/img/HomeBackground.png")}
         />
       </View>
 
