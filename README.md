@@ -1,4 +1,4 @@
-![Project Stars](https://img.shields.io/github/stars/4kauanmota/compass_plantParadise?color=1e90ff) ![Project Commits Week](https://img.shields.io/github/commit-activity/w/compass_plantParadise/NAME?color=1e90ff)
+![Project Stars](https://img.shields.io/github/stars/4kauanmota/compass_plantParadise?color=1e90ff) ![Project Commits Week](https://img.shields.io/github/commit-activity/w/compass_plantParadise/compass_plantParadise?color=1e90ff)
 
 # 📄 **Informations**
 
