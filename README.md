@@ -44,7 +44,6 @@
 
 - [GIT](https://git-scm.com/)
 - [NODE.JS](https://nodejs.org/en)
-- [NPM](https://www.npmjs.com/)
 - [EXPO](https://expo.dev/client) or [ANDROID STUDIO](https://developer.android.com/studio)
 
 ### Codes
