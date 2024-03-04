@@ -48,7 +48,7 @@
 
 ### Codes
 
-- `git clone https://github.com/4kauanmota/compass_plantParadise.git .`
+- `git clone https://github.com/4kauanmota/compass_plantParadise-APP.git .`
 - `npm install`
 - `npm run start`
 
