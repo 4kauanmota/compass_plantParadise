@@ -1,4 +1,4 @@
-![Project Stars](https://img.shields.io/github/stars/4kauanmota/compass_plantParadise?color=1e90ff) ![Project Commits Week](https://img.shields.io/github/commit-activity/w/4kauanmota/compass_plantParadise?color=1e90ff)
+![Project Stars](https://img.shields.io/github/stars/4kauanmota/compass_plantParadise-APP?color=1e90ff) ![Project Commits Week](https://img.shields.io/github/commit-activity/w/4kauanmota/compass_plantParadise-APP?color=1e90ff)
 
 # 📄 **Informations**
 
@@ -59,7 +59,7 @@
 First you will need to open the terminal in the folder where you want to clone this project, and then, you paste this code
 
 ```
-git clone https://github.com/4kauanmota/compass_plantParadise.git .
+git clone https://github.com/4kauanmota/compass_plantParadise-APP.git .
 ```
 
 ### Installing dependencies
